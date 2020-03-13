@@ -1,9 +1,11 @@
-a = int(input())
+import sys
+
+a = int(sys.stdin.readline())
 count = 1
 word = 0
 
 for i in range(a):
-    b = input()
+    b = sys.stdin.readline()
     for j in range(len(b)-1):
         if b[j] == b[j+1]:
             count = count + 1
