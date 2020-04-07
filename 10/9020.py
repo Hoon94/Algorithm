@@ -1,5 +1,4 @@
-def isprime(m, n):
-    primelist.clear()
+def isprime(n):
     n += 1                            # for문 사용을 위한 n += 1
     prime = [True] * n                # n개의 [True]가 있는 리스트 생성
     for i in range(2, int(n**0.5)+1): # n의 제곱근까지만 검사
@@ -7,25 +6,27 @@ def isprime(m, n):
             for j in range(2*i, n, i):    # prime 내 i의 배수들을 False로 변환
                 prime[j] = False
 
-    for i in range(m, n):
+    for i in range(n):
         if i > 1 and prime[i] == True:  # 1 이상이면서 남은 소수들을 출력
             primelist.append(i)  
 
 
 primelist = [] 
 a = int(input())
+isprime(10000)
 
 for i in range(a):
     b = int(input())
-    sub = b
-    value1 = value2 = 0
-    isprime(2, b)
 
-    for j in range(len(primelist)):
-        for k in range(j, len(primelist)):
-            if primelist[j] + primelist[k] == b and sub > primelist[k] - primelist[j]:
-                sub = primelist[k] - primelist[j]
-                value1 = primelist[j]
-                value2 = primelist[k]
-    
-    print(value1, value2)
+    for i in range(len(primelist)):
+        if primelist[i] > b//2:
+            c = i - 1
+            break
+
+    for j in range(c, -1, -1):
+        if b - primelist[j] in primelist:
+            value0 = primelist[j]
+            value1 = b - primelist[j]
+            break
+
+    print(value0, value1)
