@@ -1,20 +1,14 @@
 N = int(input())
 a = 0
 
-while True:
-    a_list = list(map(int, str(a)))
-    result = 0
+for i in range(1, N + 1):
+    a_list = list(map(int, str(i)))
 
-    for i in range(len(a_list)):
-        result += a_list[i]
-    
-    result = result + a
+    a = i + sum(a_list)
 
-    if result == N:
-        print(a)
+    if a == N:
+        print(i)
         break
-    elif N == a:
+    elif N == i:
         print(0)
         break
-
-    a += 1
