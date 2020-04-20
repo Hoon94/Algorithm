@@ -1,13 +1,11 @@
 import sys
-N = int(input())
-series = [0] * 10001
-print(len(series))
 
-for i in range(N):
-    a = int(sys.stdin.readline())
-    series[a] = series[a] + 1
+case = int(input())
+result = [0 for i in range(10001)]
+for num in sys.stdin:
+    result[int(num)] += 1
 
-for b in range(len(series)):
-    if series[b] !=0:
-        for c in range(series[b]):
-            print(b)
+for i in range(10001):
+    if result[i] > 0:
+        for j in range(result[i]):
+            print(i)
