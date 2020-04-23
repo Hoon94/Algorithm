@@ -1,24 +1,28 @@
 import sys
 
 N = int(sys.stdin.readline())
-arr = []
-count = 0
+num = list(map(int, sys.stdin.readline().split()))
+K = int(sys.stdin.readline())
+case = []
 
-for i in range(N):
-    arr.append(int(sys.stdin.readline()))
+for i in range(K):
+    x, y = sys.stdin.readline().split()
+    case.append((int(x), int(y)))
 
-arr.sort()
+case = list(set(case))
+case.sort(key= lambda x : (-x[0], -x[1]))
+print(case)
 
-#3 최빈값
-from collections import Counter
-k=Counter(arr).most_common()
-print(k)
+for i in range(len(case)):
 
-if len(arr) > 1:  #만약 입력값이 하나면 , 그게 최빈값이 되므로 예외처리
-    if k[0][1] == k[1][1]:
-        print(k[1][0]) 
-    # 최빈값의 빈도수를 비교하여, 2개이상의 최빈값이 있으면 두번째로 작은것을 출력
-    else: 
-        print(k[0][0]) 
-else: 
-    print(arr[0])
+    if case[i][0] > case[i][1]:
+        case1 = num[0:case[i][0]]
+        case1.sort()
+        num[0:case[i][0]] = case1
+
+    case2 = num[0:case[i][1]]
+    case2.sort(reverse=True)
+    num[0:case[i][1]] = case2
+
+for i in num:
+    print(i, end= ' ')
