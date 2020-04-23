@@ -15,23 +15,36 @@ for i in range(K):
         case.pop()
     case.append(-int(y))
 
-print(case)
+ascendidx = max(max(case), abs(min(case))) - 1
+descendidx = 0
+sortnumidx = ascendidx
 
+num[:ascendidx + 1] = sorted(num[:ascendidx + 1])
+sortnum = num.copy()
 
-for i in range(len(case)):
+case.append(0)
+curr = case.popleft()
 
-    if case[i] >= 0:
-        case1 = num[0:case[i]]
-        print(case1)
-        case1.sort()
-        num[0:case[i]] = case1
+while len(case) > 0:
+    after = case.popleft()
+
+    diff = abs(abs(curr) - abs(after))
+    if curr > 0:
+        for i in range(diff):
+            sortnum[sortnumidx] = num[ascendidx]
+            ascendidx -= 1
+            sortnumidx -= 1
     else:
-        case2 = num[0:abs(case[i])]
-        case2.sort(reverse=True)
-        num[0:abs(case[i])] = case2
+        for i in range(diff):
+            sortnum[sortnumidx] = num[descendidx]
+            descendidx += 1
+            sortnumidx -= 1
+    
+    curr = after
 
-for i in num:
+for i in sortnum:
     sys.stdout.write(str(i)+' ')
+
 
 '''
 Test example
