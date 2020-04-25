@@ -1,5 +1,6 @@
-a = [-5, 4, -3, 1]
+S = ['a', 'b', 'c']
+N = ['1', '0']
 
-print(max(a))
-print(min(a))
-print(max(max(a), abs(min(a))))
+c = ('').join(S) + ('').join(N)
+
+print(c)
