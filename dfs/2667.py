@@ -14,10 +14,16 @@ def bfs(x, y, arr):
             if nx < 0 or nx >= N or ny < 0 or ny >= N:
                 continue
             if arr[nx][ny]:
+                # 1) Recursion 
+                cnt += bfs(nx, ny, arr)
+
+                '''
+                # 2) 
                 arr[nx][ny] = 0
                 cnt += 1
                 q.append([nx, ny])
-    
+                '''
+
     return cnt
 
 N = int(input())
