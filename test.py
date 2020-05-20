@@ -1,6 +1,17 @@
-S = ['a', 'b', 'c']
-N = ['1', '0']
+n, m, v = map(int, input().split()) 
+graph = {} 
 
-c = ('').join(S) + ('').join(N)
+for _ in range(m): 
+    a, b = map(int, input().split()) 
+    if a in graph:
+        graph[a].append(b) 
+    else: 
+        graph[a] = [b] 
+    
+    if b in graph: 
+        graph[b].append(a) 
+    else: 
+        graph[b] = [a]
 
-print(c)
+print(graph)
+print(graph[1])
