@@ -1,17 +1,8 @@
-n, m, v = map(int, input().split()) 
-graph = {} 
+from collections import deque
 
-for _ in range(m): 
-    a, b = map(int, input().split()) 
-    if a in graph:
-        graph[a].append(b) 
-    else: 
-        graph[a] = [b] 
-    
-    if b in graph: 
-        graph[b].append(a) 
-    else: 
-        graph[b] = [a]
+a = deque()
+a.append([1, 2])
+x, y = a.popleft()
 
-print(graph)
-print(graph[1])
+print(x)
+print(y)
