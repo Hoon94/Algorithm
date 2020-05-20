@@ -28,13 +28,10 @@ def bfs(x, y, arr):
 
 N = int(input())
 
-arr = [[0] * N for i in range(N)]
+arr = [list(map(int, input())) for i in range(N)]
 dx = [-1, 0, 1, 0]
 dy = [0, -1, 0, 1]
 apt = []
-
-for i in range(N):
-    arr[i] = list(map(int, input()))
 
 for i in range(N):
     for j in range(N):
