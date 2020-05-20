@@ -57,7 +57,7 @@ def bfs(graph, start):
     return track_list 
         
 def dfs(graph, start): 
-    for i in graph: 
+    for i in graph:
         graph[i].sort(reverse=True) 
         
     track_list, explored, stack = list(), set(), deque([start]) 
