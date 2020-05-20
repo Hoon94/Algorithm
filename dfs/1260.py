@@ -1,3 +1,38 @@
+N, M, V = map(int, input().split())
+
+adj = [[0 for i in range(N + 1)] for j in range(N + 1)]
+
+#print(adj)
+
+for i in range(M):
+    a, b = map(int, input().split())
+    adj[a][b] = 1
+    adj[b][a] = 1
+
+def dfs(V, hist, adj):
+    hist.append(V)
+    for i in range(1, N + 1):
+        if adj[V][i] and i not in hist:
+            hist = dfs(i, hist, adj)
+    return hist
+
+def bfs(V, adj):
+    q = [V]
+    hist = [V]
+    while q:
+        now = q.pop(0)
+        for i in range(1, N + 1):
+            if adj[now][i] and i not in hist:
+                q.append(i)
+                hist.append(i)
+    return hist
+
+
+print(*dfs(V, [], adj))
+print(*bfs(V, adj))
+
+
+'''
 from collections import deque 
 
 def bfs(graph, start): 
@@ -60,3 +95,4 @@ print(*bfs(graph, v))
 
 #printing the list using * operator separated by space
 #print(*list, sep = '')
+'''
