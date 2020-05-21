@@ -1,3 +1,7 @@
+import sys
+sys.setrecursionlimit(10000)
+#Python의 경우 최대 재귀 깊이는 1000으로 설정되어있다.
+
 def dfs(x, y, arr):
     arr[x][y] = 0
 
