@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(11)
+sys.setrecursionlimit(12)
 #Python의 경우 최대 재귀 깊이는 1000으로 설정되어있다.
 
 def dfs(x, y):
@@ -21,7 +21,8 @@ def dfs(x, y):
 dx = [-1, 0, 1, 0]
 dy = [0, -1, 0, 1]
 answer = []
-M, N= map(int, input().split())
+M = 3
+N = 3
 cnt = 0
 arr = [[1] * M for _ in range(N)]
 
