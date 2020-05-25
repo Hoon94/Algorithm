@@ -1,8 +1,14 @@
-from collections import deque
+from copy import deepcopy
 
-a = deque()
-a.append([1, 2])
-x, y = a.popleft()
+N, M = map(int, input().split())
 
-print(x)
-print(y)
+dx = [-1, 0, 1, 0]
+dy = [0, -1, 0, 1]
+
+arr = [[0] * M for _ in range(N)]
+wall = deepcopy(arr)
+
+wall[0][0] = 1
+
+print(wall)
+print(arr)
