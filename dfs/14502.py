@@ -27,7 +27,22 @@ arr = [[0] * M for _ in range(N)]
 
 for i in range(N):
     arr[i] = list(map(int, input().split()))
-    
+
+for i in range(N):
+    for j in range(M):
+        if arr[i][j] == 2:
+            arr = dfs(i, j, arr)
+
+result = 0
+for i in range(N):
+    for j in range(M):
+        if arr[i][j] == 0:
+            result += 1
+
+print(arr)
+print(result)
+
+'''
 i = 0
 j = 0
 while True:
@@ -51,4 +66,5 @@ while True:
                             result += 1
                 break
 
-print(result)           
+print(result)
+'''
