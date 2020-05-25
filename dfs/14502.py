@@ -1,46 +1,54 @@
+from copy import deepcopy
 import sys
-import copy
-from collections import deque
+sys.setrecursionlimit(1000)
 
-dx = [1, -1, 0, 0]
-dy = [0, 0, 1, -1]
-ans = 0
+def dfs(x, y, arr):
+    arr[x][y] = 2
 
-def bfs():
-    global ans
-    w = copy.deepcopy(a)
-    for i in range(n):
-        for j in range(m):
-            if w[i][j] == 2:
-                q.append([i, j])
-    while q:
-        x, y = q.popleft()
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if 0 <= nx < n and 0 <= ny < m:
-                if w[nx][ny] == 0:
-                    w[nx][ny] = 2
-                    q.append([nx, ny])
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
 
+        if nx < 0 or nx >= N or ny < 0 or ny >= M:
+            continue
+        
+        if arr[nx][ny] == 0:
+            dfs(nx, ny, arr)
+
+    return arr
+
+
+N, M = map(int, input().split())
+
+dx = [-1, 0, 1, 0]
+dy = [0, -1, 0, 1]
+
+arr = [[0] * M for _ in range(N)]
+
+for i in range(N):
+    arr[i] = list(map(int, input().split()))
+    
+i = 0
+j = 0
+while True:
+    wall = deepcopy(arr)
     cnt = 0
-    for i in w:
-        cnt += i.count(0)
-    ans = max(ans, cnt)
+    result = 0
+    for i in range(N):
+        for j in range(M):
+            if wall[i][j] == 0:
+                wall[i][j] = 1
+                if cnt == 0:
+                    a = i
+                    b = j 
+                cnt += 1
+            
+            if cnt == 3:
+                wall = dfs(0, 0, wall)
+                for k in range(N):
+                    for l in range(M):
+                        if wall[k][l] == 0:
+                            result += 1
+                break
 
-def wall(x):
-    if x == 3:
-        bfs()
-        return
-    for i in range(n):
-        for j in range(m):
-            if a[i][j] == 0:
-                a[i][j] = 1
-                wall(x+1)
-                a[i][j] = 0
-
-n, m = map(int, sys.stdin.readline().split())
-a = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
-q = deque()
-wall(0)
-print(ans)
+print(result)           
