@@ -1,14 +1,19 @@
 from copy import deepcopy
 
-N, M = map(int, input().split())
+def sm(b):
+    b += 1
+    if b == 10:
+        return b
+    print('sm : ', b)
+    return sm(b)
 
-dx = [-1, 0, 1, 0]
-dy = [0, -1, 0, 1]
+def s(a):
 
-arr = [[0] * M for _ in range(N)]
-wall = deepcopy(arr)
+    for i in range(2):
+        d = sm(a)
+        print('s : ', a)
+    return d 
 
-wall[0][0] = 1
-
-print(wall)
-print(arr)
+if __name__ == "__main__":
+    a = 3
+    print(s(a))
