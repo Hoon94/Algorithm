@@ -1,4 +1,7 @@
 from copy import deepcopy
+import sys
+
+input = sys.stdin.readline
 
 N = M = 0
 dx = [-1, 0, 1, 0]
@@ -28,9 +31,9 @@ def getSafeArea(arr):
 
 def setWall(start, cnt, arr):
     global result
-    wall = deepcopy(arr)
 
     if cnt == 3:
+        wall = deepcopy(arr)
         for i in virusList:
             dfs(i[0], i[1], wall)
 
@@ -41,10 +44,10 @@ def setWall(start, cnt, arr):
         x = (int)(i / M)
         y = (int)(i % M)
 
-        if wall[x][y] == 0:
-            wall[x][y] = 1
-            setWall(i + 1, cnt + 1, wall)
-            wall[x][y] = 0
+        if arr[x][y] == 0:
+            arr[x][y] = 1
+            setWall(i + 1, cnt + 1, arr)
+            arr[x][y] = 0
 
 
 if __name__ == "__main__":
