@@ -35,7 +35,6 @@ def setWall(start, cnt, arr):
             dfs(i[0], i[1], wall)
 
         result = max(result, getSafeArea(wall))
-        #cnt = 0
         return
 
     for i in range(start, N*M):
