@@ -1,6 +1,4 @@
 from copy import deepcopy
-import sys
-sys.setrecursionlimit(10000)
 
 N = M = 0
 dx = [-1, 0, 1, 0]
@@ -9,7 +7,6 @@ virusList = []
 result = 0
 
 def dfs(x, y, arr):
-    arr[x][y] = 2
 
     for i in range(4):
         nx = x + dx[i]
@@ -17,6 +14,7 @@ def dfs(x, y, arr):
 
         if 0 <= nx and nx < N and 0 <= ny and ny < M:
             if arr[nx][ny] == 0:
+                arr[nx][ny] = 2
                 dfs(nx, ny, arr)
 
 def getSafeArea(arr):
@@ -29,6 +27,7 @@ def getSafeArea(arr):
     return safe
 
 def setWall(start, cnt, arr):
+    global result
     wall = deepcopy(arr)
 
     if cnt == 3:
@@ -36,6 +35,7 @@ def setWall(start, cnt, arr):
             dfs(i[0], i[1], wall)
 
         result = max(result, getSafeArea(wall))
+        print(result)
         return
 
     for i in range(start, N*M):
