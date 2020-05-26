@@ -35,7 +35,7 @@ def setWall(start, cnt, arr):
             dfs(i[0], i[1], wall)
 
         result = max(result, getSafeArea(wall))
-        print(result)
+        #cnt = 0
         return
 
     for i in range(start, N*M):
@@ -45,6 +45,7 @@ def setWall(start, cnt, arr):
         if wall[x][y] == 0:
             wall[x][y] = 1
             setWall(i + 1, cnt + 1, wall)
+            wall[x][y] = 0
 
 
 if __name__ == "__main__":
