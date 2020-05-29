@@ -14,5 +14,15 @@ def solution(clothes):
     return answer
 
 if __name__ == "__main__":
+    
+    #Test case 1
     clothes = [["yellow_hat", "headgear"], ["blue_sunglasses", "eyewear"], ["green_turban", "headgear"]]
+    #result 5
+    
+    '''
+    #Test case 2
+    clothes = [["crow_mask", "face"], ["blue_sunglasses", "face"], ["smoky_makeup", "face"]]
+    #reslt 3
+    '''
+
     print(solution(clothes))
