@@ -7,10 +7,11 @@ def solution(phone_book):
         
     return True
 
-
+'''
 #Test case 1
 phone_book = ["119", "97674223", "1195524421"]
 #result false
+'''
 
 '''
 #Test case 2
@@ -23,5 +24,9 @@ phone_book = ["123", "456", "789"]
 phone_book = ["12", "123", "1235", "567", "88"]
 #result false
 '''
+
+#Test case 4
+phone_book = ["12", "112", "012"]
+#result false
 
 print(solution(phone_book))
