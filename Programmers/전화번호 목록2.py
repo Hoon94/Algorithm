@@ -1,6 +1,6 @@
 def solution(phone_book):   
-    phone_book.sort()
-    
+    phone_book.sort(key=lambda x: x)
+
     for i in range(len(phone_book) - 1):
         if phone_book[i] in phone_book[i+1]:
             return False
@@ -25,8 +25,14 @@ phone_book = ["12", "123", "1235", "567", "88"]
 #result false
 '''
 
+'''
 #Test case 4
 phone_book = ["12", "112", "012"]
+#result True
+'''
+
+#Test case 5
+phone_book = ["123", "12", "13"]
 #result false
 
 print(solution(phone_book))
