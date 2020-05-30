@@ -25,9 +25,16 @@ def solution(genres, plays):
 
 if __name__ == "__main__":
 
-    #Test case 1    
+    '''
+    #Test case 1
     genres = ["classic", "pop", "classic", "classic", "pop"]
     plays = [500, 600, 150, 800, 2500]
     #result [4, 1, 3, 0]
+    '''
+
+    #Test case 2
+    genres = ["pop", "classic", "classic", "classic", "pop"]
+    plays = [500, 500, 150, 800, 500]
+    #result [3, 1, 0, 4]
 
     print(solution(genres, plays))
