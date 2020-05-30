@@ -1,30 +1,26 @@
 def solution(genres, plays):
     answer = []
     d = {}
-    d_r = {}
     album = []
     
     for i in range(len(genres)):
-        d[genres[i]] = d.get(genres[i], []) + [[plays[i], i]]
-        d_r[genres[i]] = d_r.get(genres[i], 0) + plays[i]
+        d[genres[i]] = d.get(genres[i], []) + [plays[i]]
+        
+    for i in d:
+        d[i].sort()
+        album.append([i, sum(d[i])])
     
-    album = list(d_r.items())
     album.sort(key=lambda x : x[1], reverse=True)
     
-    for i in d:
-        d[i].sort(key=lambda x : x[0])
-            
-    for i in range(len(album)):
+    for i in album:
         for j in range(2):
-            if len(d[album[i][0]]) == 0:
-                continue
-            answer.append(d[album[i][0]][-1][1])
-            d[album[i][0]] = d[album[i][0]][:-1]
-        
-    print(album)
-    print(d_r)
-    print(d)
-    print(answer)
+            if len(d[i[0]]) == 0:
+                break
+            where = plays.index(d[i[0]][-1])
+            answer.append(where)
+            plays[where] = -1
+            d[i[0]] = d[i[0]][:-1]
+    
     return answer
 
 if __name__ == "__main__":
