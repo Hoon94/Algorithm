@@ -15,13 +15,14 @@ def solution(genres, plays):
     # print(genre_dic)
      
     sorted_total_play = sorted(genre_total_play.items(), key=lambda x: x[1], reverse=True)
-    # print(sorted_total_play)
+    #print(sorted_total_play)
     
     for key in sorted_total_play:
         play_list = genre_dic[key[0]]
         
         play_list = sorted(play_list, key = lambda x : (-x[0], x[1]))
-        
+        #print(play_list)
+
         for i in range(len(play_list)):
             if i == 2:
                 break
