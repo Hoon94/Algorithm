@@ -1,23 +1,27 @@
 from collections import deque
 def bfs(queue, visited, target, words):
-    while len(queue):
-        start = queue.popleft()
-        if start != target:
-            for word in words:
-                cnt = 0
-                for i in range(len(start)):
-                    if start[i] != word[i]:
-                        cnt += 1
-                if cnt == 1 and word not in visited:
-                    queue.append(word)
-                    visited.append(word)            
     
+    start = queue.popleft()
+    if start != target:
+        for word in words:
+            cnt = 0
+            for i in range(len(start)):
+                if start[i] != word[i]:
+                    cnt += 1
+            if cnt == 1 and word not in visited:
+                    queue.append(word)
+                    visited.append(word)
+    else:
+        return 1        
+    
+    return 0
+
 def solution(begin, target, words):
     answer = 0
     visited = [begin]
     queue = deque([begin])
     
-    while len(queue):
+    while answer == 0:
         begin = queue.popleft()
         if begin != target:
             for word in words:
@@ -29,7 +33,7 @@ def solution(begin, target, words):
                     queue.append(word)
                     visited.append(word)
                     
-            bfs(queue, visited, target, words)
+            answer = bfs(queue, visited, target, words)
 
     if target == visited[-1]:
         return len(visited) - 1
