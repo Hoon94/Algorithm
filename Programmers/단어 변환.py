@@ -1,44 +1,45 @@
 from collections import deque
-def bfs(queue, visited, target, words):
-    
-    start = queue.popleft()
-    if start != target:
-        for word in words:
+def bfs(queue, visited, words):
+    result = 0
+
+    while len(queue):
+        start = queue.popleft()
+        for i in range(len(words)):
             cnt = 0
-            for i in range(len(start)):
-                if start[i] != word[i]:
-                    cnt += 1
-            if cnt == 1 and word not in visited:
-                    queue.append(word)
-                    visited.append(word)
-    else:
-        return 1        
-    
-    return 0
+            if start == target:
+                break
+            else:
+                for j in range(len(target)):
+                    if start[j] != words[i][j]:
+                        cnt += 1
+                if cnt == 1 and i not in visited:
+                    result += 1
+                    visited.append(i)
+                    queue.append(words[i])
+
+    return result
+
 
 def solution(begin, target, words):
     answer = 0
-    visited = [begin]
+    visited = []
     queue = deque([begin])
-    
-    while answer == 0:
-        begin = queue.popleft()
-        if begin != target:
-            for word in words:
-                cnt = 0
-                for i in range(len(begin)):
-                    if begin[i] != word[i]:
-                        cnt += 1
-                if cnt == 1 and word not in visited:
-                    queue.append(word)
-                    visited.append(word)
-                    
-            answer = bfs(queue, visited, target, words)
 
-    if target == visited[-1]:
-        return len(visited) - 1
+    for i in range(len(words)):
+        cnt = 0
+        if begin == target:
+            break
+        else:
+            for j in range(len(target)):
+                if begin[j] != words[i][j]:
+                    cnt += 1
+            if cnt == 1 and i not in visited:
+                visited.append(i)
+                queue.append(words[i])
+    answer = bfs(queue, visited, words)
+
+    print(visited)
     return answer
-
 
 if __name__ == "__main__":
     
