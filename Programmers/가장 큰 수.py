@@ -1,7 +1,6 @@
 def solution(numbers):
     answer = ''
-    numbers = [str(x) for x in numbers]
-    numbers.sort(key= lambda x : (x * 4)[:4], reverse=True)
+    numbers = sorted([str(x) for x in numbers], key= lambda x : (x * 4)[:4], reverse=True)
     if numbers[0] == '0':
         answer = numbers[0]
     else:
