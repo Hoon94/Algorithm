@@ -1,10 +1,8 @@
 def solution(array, commands):
     answer = []
-    array.insert(0, 0)
-    array.append(0)
     
     for i in commands:
-        result = sorted(array[i[0]:(i[1] + 1)])
+        result = sorted(array[(i[0] - 1):i[1]])
         answer.append(result[(i[2] - 1)])
         
     return answer
