@@ -1,10 +1,6 @@
 def solution(array, commands):
-    answer = []
-    
-    for i in commands:
-        answer.append(sorted(array[(i[0] - 1):i[1]])[(i[2] - 1)])
-        
-    return answer
+   
+    return list(map(lambda i: sorted(array[(i[0] - 1):i[1]])[(i[2] - 1)], commands))
 
 if __name__ == "__main__":
     
