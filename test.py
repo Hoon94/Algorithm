@@ -1,19 +1,3 @@
-from copy import deepcopy
+array = [1, 5, 2, 6, 3, 7, 4]
 
-def sm(b):
-    b += 1
-    if b == 10:
-        return b
-    print('sm : ', b)
-    return sm(b)
-
-def s(a):
-
-    for i in range(2):
-        d = sm(a)
-        print('s : ', a)
-    return d 
-
-if __name__ == "__main__":
-    a = 3
-    print(s(a))
+print(array[0:10])
