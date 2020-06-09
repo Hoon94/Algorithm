@@ -1,13 +1,9 @@
 def solution(citations):
     answer = 0
     
-    citations.sort()
-    l = len(citations)
+    citations.sort(reverse=True)
+    answer = max(map(min, enumerate(citations, start=1)))
 
-    for i in range(l):
-        if l - i <= citations[i]:
-            return l - i
-    
     return answer
 
 if __name__ == "__main__":
