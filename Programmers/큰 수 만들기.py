@@ -13,7 +13,7 @@ def solution(number, k):
 
     collected = collected[:-k] if k > 0 else collected
     answer = ''.join(collected)
-    
+
     return answer
 
 if __name__ == "__main__":
@@ -22,5 +22,19 @@ if __name__ == "__main__":
     number = "1924"
     k = 2
     #result "94"
+
+    '''
+    #Test case 2
+    number = "1231234"
+    k = 3
+    #result "3234"
+    '''
+
+    '''
+    #Test case 3
+    number = "4177252841"
+    k = 4
+    #result "775841"
+    '''
 
     print(solution(number, k))
