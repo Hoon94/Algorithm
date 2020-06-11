@@ -1,21 +1,20 @@
 def solution(number, k):
-    length = len(number)
-    if length > k:
-        m = 0
-        for cnt in range(k):
-            for idx in range(m, length-1):
-                if number[idx] < number[idx+1]:
-                    number = number[:idx] + number[idx+1: ]
-                    length -= 1
-                    if idx > 0:
-                        m = idx-1
-                    break
-            else:
-                number = number[:length-k+cnt]
-                break
-            return "".join([str(i) for i in number])
-    else:
-        return "0"
+    collected = []
+    for i, num in enumerate(number):
+        while len(collected) > 0 and collected[-1] < num and k > 0:
+            collected.pop()
+            k -= 1
+
+        if k == 0:
+            collected += list(number[i:])
+            break
+        
+        collected.append(num)
+
+    collected = collected[:-k] if k > 0 else collected
+    answer = ''.join(collected)
+    
+    return answer
 
 if __name__ == "__main__":
     
