@@ -26,7 +26,7 @@ def solution(name):
                 left+=1
             else:
                 break
-            
+
         if right>left:
             answer+=left
             index-=left
@@ -34,3 +34,17 @@ def solution(name):
             answer+=right
             index+=right
     return answer
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    name = "JEROEN"
+    #result 56
+
+    '''
+    #Test case 2
+    name = "JAN"
+    #result 23
+    '''
+
+    print(solution(name))
