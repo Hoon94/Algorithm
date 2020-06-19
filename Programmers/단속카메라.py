@@ -14,3 +14,11 @@ def solution(routes):
             answer += 1
             
     return answer
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    routes = [[-20,15], [-14,-5], [-18,-13], [-5,-3]]
+    #result 2
+
+    print(solution(routes))
