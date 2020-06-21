@@ -19,3 +19,12 @@ def solution(n, costs):
                     break
     
     return answer
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    n = 4
+    costs = [[0,1,1],[0,2,2],[1,2,5],[1,3,1],[2,3,8]]
+    #result 4
+
+    print(solution(n, costs))
