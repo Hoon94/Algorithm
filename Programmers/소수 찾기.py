@@ -20,3 +20,17 @@ def solution(numbers):
                 answer.add(num)
 
     return len(answer)
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    numbers = "17"
+    #result 3
+
+    '''
+    #Test case 2
+    numbers = "011"
+    #result 2
+    '''
+
+    print(solution(numbers))
