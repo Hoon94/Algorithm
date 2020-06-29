@@ -40,3 +40,11 @@ def solution(baseball):
                 answer += 1
     
     return answer
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    baseball = [[123, 1, 1], [356, 1, 0], [327, 2, 0], [489, 0, 1]]
+    #result 2
+
+    print(solution(baseball))
