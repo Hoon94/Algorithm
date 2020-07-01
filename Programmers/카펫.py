@@ -1,9 +1,15 @@
-def solution(brown, red):
-    for index in range(1, red + 1):
-        if red % index == 0: 
-            length = red // index
-            if (((index + 2) * (length + 2)) - (index * length)) == brown:
-                return [max(index + 2, length + 2), min(index + 2, length + 2)]
+def solution(brown, yellow):
+    whole = brown + yellow
+    available_lst = []
+
+    for w in range(3, whole // 3+1):
+        if whole % w == 0 and w <= whole/w:
+            available_lst.append([int(whole / w), w])
+            
+    for avail in available_lst:
+        if sum(avail) * 2 - 4 == brown:
+            answer = avail
+    return answer
 
 if __name__ == "__main__":
     
