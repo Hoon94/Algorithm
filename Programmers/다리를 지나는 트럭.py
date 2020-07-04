@@ -12,3 +12,27 @@ def solution(bridge_length, weight, truck_weights):
                 q.append(0)
     
     return time
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    bridge_length = 2
+    weight = 10
+    truck_weights = [7, 4, 5, 6]
+    #result 8
+
+    '''
+    #Test case 2
+    bridge_length = 100
+    weight = 100
+    truck_weights = [10]
+    #result 101
+
+    #Test case 3
+    bridge_length = 100
+    weight = 100
+    truck_weights = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+    #result 110
+    '''
+
+    print(solution(bridge_length, weight, truck_weights))
