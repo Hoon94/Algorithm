@@ -12,3 +12,21 @@ def solution(heights):
             answer = [0] + answer
             
     return answer
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    heights = [6, 9, 5, 7, 4]
+    #result [0, 0, 2, 2, 4]
+
+    '''
+    #Test case 2
+    heights = [3, 9, 9, 3, 5, 7, 2]
+    #result [0, 0, 0, 3, 3, 3, 6]
+
+    #Test case 3
+    heights = [1, 5, 3, 6, 7, 6, 5]
+    #result [0, 0, 2, 0, 0, 5, 6]
+    '''
+
+    print(solution(heights))
