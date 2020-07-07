@@ -1,3 +1,10 @@
-array = [1, 5, 2, 6, 3, 7, 4]
+import queue
 
-print(array[0:10])
+data = queue.PriorityQueue()
+
+data.put((10, 5))
+data.put((3, 10))
+data.put((9, 1))
+
+print(data.qsize())
+print(data.get())
