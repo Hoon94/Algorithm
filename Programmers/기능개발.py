@@ -14,3 +14,12 @@ def solution(progresses, speeds):
     answer.append(len(progresses) - front)
 
     return answer
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    progresses = [93, 30, 55]
+    speeds = [1, 30, 5]
+    #result [2, 1]
+
+    print(solution(progresses, speeds))
