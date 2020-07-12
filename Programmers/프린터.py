@@ -6,8 +6,7 @@ def solution(priorities, location):
             pos.append(True)
         else:
             pos.append(False)
-
-    answer = 0
+            
     count = 0
     m = max(priorities)
 
