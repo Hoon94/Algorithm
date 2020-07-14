@@ -42,6 +42,15 @@ class NodeMgmt:
                 else:
                     node = node.next
 
+    def search_node(self, data):
+        node = self.head
+        while node: 
+            if node.data == data:
+                return node
+            else:
+                node = node.next
+
+
 if __name__ == "__main__":
     
     linkedlist1 = NodeMgmt(0)
