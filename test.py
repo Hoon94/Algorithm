@@ -45,13 +45,13 @@ class NodeMgmt:
 
 
 linkedlist1 = NodeMgmt(0)
-linkedlist1.desc()
+#linkedlist1.desc()
 
 print(linkedlist1.head)
 
-
-'''
 for data in range(1, 10):
     linkedlist1.add(data)
+#linkedlist1.desc()
+
+linkedlist1.delete(4)
 linkedlist1.desc()
-'''
