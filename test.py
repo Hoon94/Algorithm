@@ -28,8 +28,8 @@ class NodeMgmt:
             print (node.data)
             node = node.next
 
-
-double_linked_list = NodeMgmt(0)
-for data in range(1, 10):
-    double_linked_list.insert(data)
-double_linked_list.desc()
+if __name__ == "__main__":
+    double_linked_list = NodeMgmt(0)
+    for data in range(1, 10):
+        double_linked_list.insert(data)
+    double_linked_list.desc()
