@@ -40,6 +40,18 @@ class NodeMgmt:
                 node = node.next
         return False
 
+    def search_from_tail(self, data):
+        if self.head == None:
+            return False
+    
+        node = self.tail
+        while node:
+            if node.data == data:
+                return node
+            else:
+                node = node.prev
+        return False
+
 
 if __name__ == "__main__":
     double_linked_list = NodeMgmt(0)
@@ -47,6 +59,8 @@ if __name__ == "__main__":
         double_linked_list.insert(data)
     #double_linked_list.desc()
 
+    '''
+    #앞에서부터 검색
     node_3 = double_linked_list.search_from_head(3)
     print(node_3.data)
 
@@ -55,3 +69,8 @@ if __name__ == "__main__":
         print(node_3.data)
     else:
         print("No data")
+    '''
+
+    #뒤에서부터 검색
+    node_3 = double_linked_list.search_from_tail(3)
+    print(node_3.data)
