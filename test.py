@@ -52,6 +52,25 @@ class NodeMgmt:
                 node = node.prev
         return False
 
+    
+    def insert_before(self, data, before_data):
+        if self.head == None:
+            self.head = Node(data)
+            return True
+        else:
+            node = self.tail
+            while node.data != before_data:
+                node = node.prev
+                if node == None:
+                    return False
+            new = Node(data)
+            before_new = node.prev
+            before_new.next = new
+            new.prev = before_new
+            new.next = node
+            node.prev = new
+            return True
+
 
 if __name__ == "__main__":
     double_linked_list = NodeMgmt(0)
@@ -69,8 +88,12 @@ if __name__ == "__main__":
         print(node_3.data)
     else:
         print("No data")
-    '''
-
+    
     #뒤에서부터 검색
     node_3 = double_linked_list.search_from_tail(3)
     print(node_3.data)
+    '''
+
+    #data 값이 2 인 노드 앞에 1.5 값을 갖는 노드 생성
+    double_linked_list.insert_before(1.5, 2)
+    double_linked_list.desc()
