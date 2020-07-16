@@ -13,3 +13,11 @@ def solution(arrangment):
             x -= 1
 
     return cnt
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    arrangement = "()(((()())(())()))(())"
+    #result 17
+
+    print(solution(arrangement))
