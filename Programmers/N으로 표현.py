@@ -18,3 +18,19 @@ def solution(N, number):
             break
         
     return answer
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    N = 5
+    number = 12
+    #result 4
+
+    '''
+    #Test case 2
+    N = 2
+    number = 11
+    #result 3
+    '''
+
+    print(solution(N, number))
