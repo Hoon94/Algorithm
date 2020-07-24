@@ -55,3 +55,5 @@ if __name__ == "__main__":
         s = ss[i]
         nums[i] = saveSum(nums[i])
         print(quantize(0, s))
+
+    #Result = 0, 651
