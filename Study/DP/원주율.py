@@ -2,10 +2,8 @@ cache = [-1] * 10
 
 def classify(a : int, b : int):
     M = list(map(int, N[a:b]))
-    print(M)
     
     if M == [M[0]] * len(M):
-        print("level 1")
         return 1
 
     progressive = True
@@ -16,10 +14,8 @@ def classify(a : int, b : int):
             break
 
     if progressive and abs(M[1] - M[0]) == 1:
-        print("level 2")
         return 2
     elif progressive:
-        print("level 5")
         return 5
 
     alternating = True
@@ -28,10 +24,8 @@ def classify(a : int, b : int):
             alternating = False
 
     if alternating:
-        print("level 4")
         return 4
 
-    print("level 10")
     return 10
 
 def memorize(begin : int):
@@ -44,7 +38,6 @@ def memorize(begin : int):
     cache[begin] = 10000
     for L in range(3, 6):
         if begin + L <= len(N):
-            #print(begin, cache[begin])
             cache[begin] = min(cache[begin], memorize(begin + L) + classify(begin, begin + L))
             
     return cache[begin]
