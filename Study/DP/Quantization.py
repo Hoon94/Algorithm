@@ -39,20 +39,19 @@ def quantize(start : int, parts : int):
 
     return cache[start][parts]
 
+
 if __name__ == "__main__":
-    pSum = [0] * 101
-    pSqSum = [0] * 101
-    cache= [[-1 for x in range(11)] for y in range(11)]
-
-    n = 10
-    s = 3
-    num = [3, 3, 3, 1, 2, 3, 2, 2, 2, 1]
+    C = int(input("Number of Test case : "))
+    ns = [10, 9]
+    ss = [3, 3]
+    nums = [[3, 3, 3, 1, 2, 3, 2, 2, 2, 1], [1, 744, 755, 4, 897, 902, 890, 6, 777]]
     
-    '''
-    n = 9
-    s = 3
-    num = [1, 744, 755, 4, 897, 902, 890, 6, 777]
-    '''
+    for i in range(C):
+        pSum = [0] * 101
+        pSqSum = [0] * 101
+        cache= [[-1 for x in range(11)] for y in range(11)]
 
-    num = saveSum(num)
-    print(quantize(0, s))
+        n = ns[i]
+        s = ss[i]
+        nums[i] = saveSum(nums[i])
+        print(quantize(0, s))
