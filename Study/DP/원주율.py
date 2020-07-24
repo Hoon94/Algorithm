@@ -1,5 +1,3 @@
-cache = [-1] * 10
-
 def classify(a : int, b : int):
     M = list(map(int, N[a:b]))
     
@@ -42,10 +40,14 @@ def memorize(begin : int):
             
     return cache[begin]
 
-#N = '12341234' # 4
-#N = '11111222' # 2
-#N = '12122222' # 5
-#N = '22222222' # 2
-N = '12673939' # 14
+if __name__ == "__main__":
+    C = int(input("Number of Test case : "))
+    Ns = ['12341234', '11111222', '12122222', '22222222', '12673939']
 
-print(memorize(0))
+    for i in range(C):
+        cache = [-1] * 10
+        N = Ns[i]
+
+        print(memorize(0))
+
+    #Result = 4, 2, 5, 2, 14
