@@ -1,12 +1,4 @@
-pSum = [0] * 101
-pSqSum = [0] * 101
-cache= [[-1 for x in range(11)] for y in range(11)]
-n = 10
-s = 3
-num = [3, 3, 3, 1, 2, 3, 2, 2, 2, 1]
-
-def saveSum():
-    global num
+def saveSum(num : list):
     num = sorted(num)
 
     pSum[0] = num[0]
@@ -14,6 +6,8 @@ def saveSum():
     for i in range(1, n):
         pSum[i] = pSum[i - 1] + num[i]
         pSqSum[i] = pSqSum[i - 1] + (num[i] ** 2)
+    
+    return num
 
 def minError(low : int, high : int):
     if low == 0:
@@ -46,9 +40,19 @@ def quantize(start : int, parts : int):
     return cache[start][parts]
 
 if __name__ == "__main__":
-    saveSum()
-    print(num)
-    print(quantize(0, s))
+    pSum = [0] * 101
+    pSqSum = [0] * 101
+    cache= [[-1 for x in range(11)] for y in range(11)]
+
+    n = 10
+    s = 3
+    num = [3, 3, 3, 1, 2, 3, 2, 2, 2, 1]
     
-    for c in cache:
-        print(c)
+    '''
+    n = 9
+    s = 3
+    num = [1, 744, 755, 4, 897, 902, 890, 6, 777]
+    '''
+
+    num = saveSum(num)
+    print(quantize(0, s))
