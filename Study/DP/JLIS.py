@@ -1,16 +1,3 @@
-#cache = [[-1] * 101] * 101
-
-A = [1, 2, 3]
-B = [4, 5, 6]
-'''
-A = [10, 20, 30, 1, 2]
-B = [10, 20, 30]
-'''
-
-n = len(A)
-m = len(B)
-cache = [[-1 for col in range(m + 1)] for row in range(n + 1)]
-
 def jlis(indexA : int, indexB : int):
     if cache[indexA + 1][indexB + 1] != -1:
         return cache[indexA + 1][indexB + 1]
@@ -34,7 +21,7 @@ def jlis(indexA : int, indexB : int):
     while nextA < n:
         if maxElement < A[nextA]:
             cache[indexA + 1][indexB + 1] = max(cache[indexA + 1][indexB + 1], jlis(nextA, indexB) + 1)
-            print('nextA : ', nextA, 'indexB : ', indexB, 'value : ', cache[indexA + 1][indexB + 1])
+            #print('nextA : ', nextA, 'indexB : ', indexB, 'value : ', cache[indexA + 1][indexB + 1])
         nextA += 1
 
     nextB = indexB + 1
@@ -42,10 +29,24 @@ def jlis(indexA : int, indexB : int):
         if maxElement < B[nextB]:
             #print("indexA : {} indexB : {}, maxElement : {} nextB : {}".format(indexA, indexB, maxElement, nextB))
             cache[indexA + 1][indexB + 1] = max(cache[indexA + 1][indexB + 1], jlis(indexA, nextB) + 1)
-            print('indexA : ', indexA, 'nextB : ', nextB, 'value : ', cache[indexA + 1][indexB + 1])
+            #print('indexA : ', indexA, 'nextB : ', nextB, 'value : ', cache[indexA + 1][indexB + 1])
         nextB += 1
         
     return cache[indexA + 1][indexB + 1]
 
-print(jlis(-1, -1))
-print(cache)
+if __name__ == "__main__":
+    C = int(input("Number of Test case : "))
+    ns = [3, 3, 5]
+    ms = [3, 3, 3]
+    As = [[1, 2, 4], [1, 2, 3], [10, 20, 30, 1, 2]]
+    Bs = [[3, 4, 7], [4, 5, 6], [10, 20, 30]]
+
+    for i in range(C):
+        A = As[i]; B = Bs[i]
+        n = ns[i]; m = ms[i]
+
+        cache = [[-1 for col in range(m + 1)] for row in range(n + 1)]
+
+        print(jlis(-1, -1))
+
+    #Result = 5, 6, 5
