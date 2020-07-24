@@ -5,6 +5,7 @@ def classify(a : int, b : int):
     print(M)
     
     if M == M[0] * len(M):
+        print("level 1")
         return 1
 
     progressive = True
@@ -15,19 +16,22 @@ def classify(a : int, b : int):
             break
 
     if progressive and abs(M[1] - M[0]) == 1:
+        print("level 2")
         return 2
+    elif progressive:
+        print("level 5")
+        return 5
 
     alternating = True
     for i in range(len(M)):
-        if M[i] != M[i % 2]:
+        if M[i] != M[(i % 2)]:
             alternating = False
 
     if alternating:
+        print("level 4")
         return 4
 
-    if progressive:
-        return 5
-
+    print("level 10")
     return 10
 
 def memorize(begin : int):
@@ -45,10 +49,10 @@ def memorize(begin : int):
     return cache[begin]
 
 #N = '12341234' # 4
-#N = '11111222' # 2
+N = '11111222' # 2
 #N = '12122222' # 5
 #N = '22222222' # 2
-N = '12673939' # 14
+#N = '12673939' # 14
 
 print(memorize(0))
 print(cache)
