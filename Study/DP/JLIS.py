@@ -2,7 +2,7 @@ def jlis(indexA : int, indexB : int):
     if cache[indexA + 1][indexB + 1] != -1:
         return cache[indexA + 1][indexB + 1]
 
-    cache[indexA + 1][indexB + 1] = 2
+    cache[indexA + 1][indexB + 1] = 0
     
     if indexA == -1:
         a = -100
@@ -15,21 +15,17 @@ def jlis(indexA : int, indexB : int):
         b = B[indexB]
     
     maxElement = max(a, b)
-    #print("indexA : {} indexB : {}, maxElement : {}".format(indexA, indexB, maxElement))
     
     nextA = indexA + 1
     while nextA < n:
         if maxElement < A[nextA]:
             cache[indexA + 1][indexB + 1] = max(cache[indexA + 1][indexB + 1], jlis(nextA, indexB) + 1)
-            #print('nextA : ', nextA, 'indexB : ', indexB, 'value : ', cache[indexA + 1][indexB + 1])
         nextA += 1
 
     nextB = indexB + 1
     while nextB < m:
         if maxElement < B[nextB]:
-            #print("indexA : {} indexB : {}, maxElement : {} nextB : {}".format(indexA, indexB, maxElement, nextB))
             cache[indexA + 1][indexB + 1] = max(cache[indexA + 1][indexB + 1], jlis(indexA, nextB) + 1)
-            #print('indexA : ', indexA, 'nextB : ', nextB, 'value : ', cache[indexA + 1][indexB + 1])
         nextB += 1
         
     return cache[indexA + 1][indexB + 1]
