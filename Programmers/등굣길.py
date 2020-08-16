@@ -13,3 +13,12 @@ def solution(m, n, puddles):
 
     answer = board[n][m]
     return answer % 1000000007
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    m = 4; n = 3
+    puddles = [[2, 2]]
+    #result 4
+
+    print(solution(m, n, puddles))
