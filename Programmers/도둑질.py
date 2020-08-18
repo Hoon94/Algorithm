@@ -14,3 +14,11 @@ def solution(money):
         dp2[i] = max(dp2[i - 1], money[i] + dp2[i - 2])
 
     return max(max(dp1), max(dp2))
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    money = [1, 2, 3, 1]
+    #result 4
+
+    print(solution(money))
