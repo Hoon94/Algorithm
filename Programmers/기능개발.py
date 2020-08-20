@@ -1,19 +1,13 @@
-import math
-
 def solution(progresses, speeds):
-    answer = []
-    front = 0
- 
-    progresses = [math.ceil((100 - a) / b) for a, b in zip(progresses, speeds)]
-       
-    for idx in range(len(progresses)):
-        if progresses[front] < progresses[idx]:
-            answer.append(idx - front)
-            front = idx
+    Q = []
 
-    answer.append(len(progresses) - front)
-
-    return answer
+    for p, s in zip(progresses, speeds):
+        if len(Q) == 0 or Q[-1][0] < -((p - 100) // s):
+            Q.append([-((p - 100) // s), 1])
+        else:
+            Q[-1][1] += 1
+            
+    return [q[1] for q in Q]
 
 if __name__ == "__main__":
     
