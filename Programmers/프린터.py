@@ -1,25 +1,15 @@
 def solution(priorities, location):
-    pos = []
-
-    for i in range(len(priorities)):
-        if i == location:
-            pos.append(True)
-        else:
-            pos.append(False)
-            
-    count = 0
-    m = max(priorities)
-
+    queue =  [(i, p) for i, p in enumerate(priorities)]
+    answer = 0
+    
     while True:
-        if m > priorities[0]:
-            priorities.append(priorities.pop(0))
-            pos.append(pos.pop(0))
+        cur = queue.pop(0)
+        if any(cur[1] < q[1] for q in queue):
+            queue.append(cur)
         else:
-            count += 1
-            priorities.pop(0)
-            if pos.pop(0):
-                return count
-            m = max(priorities)
+            answer += 1
+            if cur[0] == location:
+                return answer
 
 if __name__ == "__main__":
     
