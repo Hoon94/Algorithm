@@ -1,11 +1,17 @@
+import heapq
+
 def solution(scoville, K):
     answer = -1 
     count = 0 
     check_flag = False 
     
+    heapq_scoville = heapq.heapify(scoville)
+
     while min(scoville) < K:
-        scoville = sorted(scoville, reverse = True)
-        scoville.append(scoville.pop() + (scoville.pop() * 2)) 
+        min_first = heapq.heappop(scoville)
+        min_second = heapq.heappop(scoville)
+
+        heapq.heappush(scoville, min_first + (min_second * 2))
         
         if len(scoville) == 1 and scoville[0] < K:
             check_flag = True
