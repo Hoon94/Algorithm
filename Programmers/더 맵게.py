@@ -1,23 +1,23 @@
-import heapq
+import heapq as hq
 
 def solution(scoville, K):
-    count = 0
-    heapq.heapify(scoville)
 
-    while len(scoville) > 1:
-        n1 = heapq.heappop(scoville)
-        n2 = heapq.heappop(scoville)
+    hq.heapify(scoville)
+    answer = 0
 
-        if n1 < K or n2 < K :
-            heapq.heappush(scoville, n1 + (n2 * 2))
-            count += 1
-        else :
-            return count
+    while True:
+        first = hq.heappop(scoville)
 
-    if scoville[0] > K:
-        return count
-    else :
-        return -1
+        if first >= K:
+            break
+        if len(scoville) == 0:
+            return -1
+        
+        second = hq.heappop(scoville)
+        hq.heappush(scoville, first + second * 2)
+        answer += 1  
+
+    return answer
 
 if __name__ == "__main__":
     
