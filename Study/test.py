@@ -1,14 +1,11 @@
-import sys
+def n():
+    num = 0
+    print(name[num])
+    num += 1
 
-num = int(sys.stdin.readline())
+name = ['none'] * 5
 
-arr = [0] * (num + 1)
+num = 0
 
-arr[1] = 1
-if num > 1:
-    arr[2] = 3
-
-for i in range(3, num + 1):
-    arr[i] = arr[i - 2] * 2 + arr[i - 1]
-
-sys.stdout.write(str(arr[num] % 10007))
+for i in range(3):
+    n()
