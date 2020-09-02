@@ -17,3 +17,11 @@ def solution(jobs):
                 start += 1
 
     return answer // length
+
+if __name__ == "__main__":
+    
+    #Test case 1
+    jobs = [[0, 3], [1, 9], [2, 6]]
+    #result 9
+
+    print(solution(jobs))
