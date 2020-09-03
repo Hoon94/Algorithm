@@ -1,22 +1,24 @@
+import heapq
+from collections import deque
+
 def solution(jobs):
-    answer = 0
-    start = 0  # 현재까지 진행된 작업 시간
-    length = len(jobs)
+    tasks = deque(sorted([(x[1], x[0]) for x in jobs], key=lambda x: (x[1], x[0])))
+    q = []
+    heapq.heappush(q, tasks.popleft())
+    current_time, total_response_time = 0, 0
+    
+    while len(q) > 0:
+        dur, arr = heapq.heappop(q)
+        current_time = max(current_time + dur, arr + dur)
+        total_response_time += current_time - arr
 
-    jobs = sorted(jobs, key=lambda x: x[1])  # 소요시간 우선 정렬
+        while len(tasks) > 0 and tasks[0][1] <= current_time:
+            heapq.heappush(q, tasks.popleft())
 
-    while len(jobs) != 0:
-        for i in range(len(jobs)):
-            if jobs[i][0] <= start:
-                start += jobs[i][1]
-                answer += start - jobs[i][0]
-                jobs.pop(i)
-                break
-            # 해당시점에 아직 작업이 들어오지 않았으면 시간 ++
-            if i == len(jobs) - 1:
-                start += 1
+        if len(tasks) > 0 and len(q) == 0:
+            heapq.heappush(q, tasks.popleft())
 
-    return answer // length
+    return total_response_time // len(jobs)
 
 if __name__ == "__main__":
     
