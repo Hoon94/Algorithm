@@ -2,22 +2,23 @@ import heapq
 
 def solution(operations):
     heap = []
-    
-    for op in operations:
-        order = op.split()
 
-        if order[0] == 'I':
-            heapq.heappush(heap, int(order[1]))
-        elif heap:       
-            if order[1] == '1':
-                heap.remove(max(heap))
-            else:
+    for operation in operations:
+        operator, operand = operation.split(' ')
+        operand = int(operand)
+
+        if operator == 'I':
+            heapq.heappush(heap, operand)
+        elif heap:
+            if operand < 0:
                 heapq.heappop(heap)
-                
-    if len(heap) == 0:
+            else:
+                heap.remove(max(heap))
+
+    if not heap:
         return [0, 0]
-    
-    return [max(heap), min(heap)]
+
+    return [max(heap), heap[0]]
 
 if __name__ == "__main__":
     
