@@ -1,25 +1,17 @@
 from itertools import permutations
 
-def solution(numbers):
-    answer = set()
-    maximum = 10000000
-    prime_lst = [False, False] + [True] * maximum
+def solution(n):
+    a = set()
 
-    for idx, num in enumerate(prime_lst):
-        if num:
-            k = idx * 2
-            while k <= maximum:
-                prime_lst[k] = False
-                k += idx
-
-    for i in range(1, len(numbers) + 1):
-        perm = permutations(list(numbers), i)
-        for i in list(perm):
-            num = int("".join(list(i)))
-            if prime_lst[num]:
-                answer.add(num)
-
-    return len(answer)
+    for i in range(len(n)):
+        a |= set(map(int, map("".join, permutations(list(n), i + 1))))
+    
+    a -= set(range(0, 2))
+    
+    for i in range(2, int(max(a) ** 0.5) + 1):
+        a -= set(range(i * 2, max(a) + 1, i))
+    
+    return len(a)
 
 if __name__ == "__main__":
     
