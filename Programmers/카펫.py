@@ -1,21 +1,14 @@
 def solution(brown, yellow):
-    whole = brown + yellow
-    available_lst = []
-
-    for w in range(3, whole // 3+1):
-        if whole % w == 0 and w <= whole/w:
-            available_lst.append([int(whole / w), w])
-            
-    for avail in available_lst:
-        if sum(avail) * 2 - 4 == brown:
-            answer = avail
-    return answer
-
+    for i in range(1, int(yellow ** (1 / 2)) + 1):
+        if yellow % i == 0:
+            if 2 * (i + yellow // i) == brown - 4:
+                return [yellow // i + 2, i + 2]
+                
 if __name__ == "__main__":
     
     #Test case 1
     brown = 10
-    yellow = 8
+    yellow = 2
     #result [4, 3]
 
     '''
