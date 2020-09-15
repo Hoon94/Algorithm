@@ -1,24 +1,26 @@
 import sys
-input = sys.stdin.readline
- 
- 
-def DFS(i):
-    global N, col, slash, backSlash, case
-    
-    if i == N:
-        case += 1
+
+def solve_dfs(i):
+    global ans
+
+    if i == n:
+        ans += 1
         return
-    for j in range(N):
-        if not (col[j] or slash[i + j] or backSlash[i - j + N - 1]):
-            col[j] = slash[i + j] = backSlash[i - j + N - 1] = True
-            DFS(i + 1)
-            col[j] = slash[i + j] = backSlash[i - j + N - 1] = False
- 
- 
-N = int(input())
-col, slash, backSlash = [False] * N, [False] * (2 * N - 1), [False] * (2 * N - 1)
-case = 0
- 
-DFS(0)
- 
-print(case)
+
+    for j in range(n):
+        if (not a[j] and not b[i + j] and not c[i - j + n - 1]) :
+            a[j] = b[i + j] = c[i - j + n - 1] = True
+            solve_dfs(i + 1)
+            a[j] = b[i + j] = c[i - j + n - 1] = False
+
+if __name__ == "__main__":
+    
+    n = int(sys.stdin.readline())
+    ans = 0
+    a = [False] * n
+    b = [False] * (2 * (n - 1))
+    c = [False] * (2 * (n - 1))
+
+    solve_dfs(0)
+    
+    print(ans)
