@@ -1,26 +1,28 @@
-import sys
+from sys
 
-def solve_dfs(i):
-    global ans
+def dfs(x):
+    global answer
 
-    if i == n:
-        ans += 1
+    if x == n:
+        answer += 1
         return
 
-    for j in range(n):
-        if (not a[j] and not b[i + j] and not c[i - j + n - 1]) :
-            a[j] = b[i + j] = c[i - j + n - 1] = True
-            solve_dfs(i + 1)
-            a[j] = b[i + j] = c[i - j + n - 1] = False
+    for y in range(n):
+        if y in columns or (x + y) in l_diagonals or (x - y) in r_diagonals:
+            continue
+        
+        columns.add(y)
+        l_diagonals.add(x + y)
+        r_diagonals.add(x - y)
+        dfs(x + 1)
+        columns.remove(y)
+        l_diagonals.remove(x + y)
+        r_diagonals.remove(x - y)
 
-if __name__ == "__main__":
-    
+
+if __name__ == '__main__':
+    answer = 0
     n = int(sys.stdin.readline())
-    ans = 0
-    a = [False] * n
-    b = [False] * (2 * (n - 1))
-    c = [False] * (2 * (n - 1))
-
-    solve_dfs(0)
-    
-    print(ans)
+    columns, l_diagonals, r_diagonals = set(), set(), set()
+    dfs(0)
+    print(answer)
