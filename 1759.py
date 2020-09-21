@@ -1,9 +1,3 @@
-L, C = map(int, input().split())
-alpha = list(map(str, input().split()))
-out = []
-all_out = []
-alpha.sort()
-
 def solve(depth, idx, L, C):
     if depth == L:
         all_out.append(''.join(map(str, out)))
@@ -30,5 +24,13 @@ def password(list_check):
             
     return
 
-solve(0, 0, L, C)
-password(all_out)
+if __name__ == "__main__":
+    
+    L, C = map(int, input().split())
+    alpha = list(map(str, input().split()))
+    out = []
+    all_out = []
+    alpha.sort()
+
+    solve(0, 0, L, C)
+    password(all_out)
