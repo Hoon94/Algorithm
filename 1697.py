@@ -1,8 +1,6 @@
 import sys
 from collections import deque
 
-LIMIT = 100001
-
 def solve(arr, n, k):
     q = deque()
     q.append(n)
@@ -18,7 +16,10 @@ def solve(arr, n, k):
                 arr[j] = arr[i] + 1
                 q.append(j)
 
-N, K = map(int, sys.stdin.readline().split())
-find = [0] * LIMIT
+if __name__ == "__main__":
+    LIMIT = 100001
 
-print(solve(find, N, K))
+    N, K = map(int, sys.stdin.readline().split())
+    find = [0] * LIMIT
+
+    print(solve(find, N, K))
