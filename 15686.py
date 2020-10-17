@@ -38,19 +38,21 @@ def far(c, h):
     
     return res
 
-n, m = map(int, input().split())
-arr = [list(map(int, input().split())) for _ in range(n)]
-ans = 99999
-# 0 = 빈칸 // 1 = 집 // 2 = 치킨집
-# 집 찾기, 치킨집 개수 찾기
-chicken = 0
-house = []
-for i in range(n):
-    for j in range(n):
-        if(arr[i][j] == 1):
-            house.append((i, j))
-        elif(arr[i][j] == 2):
-            chicken += 1
+if __name__ == "__main__":
+    n, m = map(int, input().split())
+    arr = [list(map(int, input().split())) for _ in range(n)]
+    ans = 99999
 
-find(0, 0, 0)
-print(ans)
+    # 0 = 빈칸 // 1 = 집 // 2 = 치킨집
+    # 집 찾기, 치킨집 개수 찾기
+    chicken = 0
+    house = []
+    for i in range(n):
+        for j in range(n):
+            if(arr[i][j] == 1):
+                house.append((i, j))
+            elif(arr[i][j] == 2):
+                chicken += 1
+
+    find(0, 0, 0)
+    print(ans)
