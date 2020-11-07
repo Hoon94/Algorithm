@@ -1,17 +1,14 @@
-class Calculator:
-    def __init__(self):
-        self.result = 0
+import random
 
-    def add(self, num):
-        self.result += num
+def insertion_sort(data):
+    for index in range(len(data) - 1):
+        for index2 in range(index + 1, 0, -1):
+            if data[index2] < data[index2 - 1]:
+                data[index2], data[index2 - 1] = data[index2 - 1], data[index2]
+            else:
+                break
+    return data
 
-class maxx(Calculator):
-    def add(self, num):
-        self.result += num
-        if self.result > 100:
-            self.result = 100
-
-cal = maxx()
-cal.add(101)
-
-print(cal.result)
+if __name__ == "__main__":
+    data_list = random.sample(range(100), 10)
+    print (insertion_sort(data_list))
