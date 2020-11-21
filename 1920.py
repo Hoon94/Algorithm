@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+print = sys.stdout.write
 
 if __name__ == "__main__":
 
@@ -9,7 +10,4 @@ if __name__ == "__main__":
     m_list = list(map(int, input().split()))
 
     for _ in m_list:
-        if _ in n_list:
-            sys.stdout.write('1\n')
-        else:
-            sys.stdout.write('0\n')
+        print('1\n') if _ in n_list else print('0\n')
