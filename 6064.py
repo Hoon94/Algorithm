@@ -1,14 +1,16 @@
-def num(m, n, x, y):
-    while x <= m * n:
-        if (x - y) % n == 0:
-            return x
+if __name__ == "__main__":
 
-        x += m
+    def num(m, n, x, y):
+        while x <= m * n:
+            if (x - y) % n == 0:
+                return x
 
-    return -1
+            x += m
 
-t = int(input())
+        return -1
 
-for i in range(t):
-    m, n, x, y = map(int, input().split())
-    print(num(m, n, x, y))
+    t = int(input())
+
+    for i in range(t):
+        m, n, x, y = map(int, input().split())
+        print(num(m, n, x, y))
