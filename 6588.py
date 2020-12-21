@@ -26,4 +26,6 @@ def Goldbach():
         else:
             print("Goldbach's conjecture is wrong.")
 
-Goldbach()
+if __name__ == "__main__":
+
+    Goldbach()
