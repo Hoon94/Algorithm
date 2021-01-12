@@ -1,10 +1,22 @@
-import heapq
+def get_max_value(data_list, capacity):
+    data_list = sorted(data_list, key=lambda x: x[1] / x[0], reverse=True)
+    total_value = 0
+    details = list()
+    
+    for data in data_list:
+        if capacity - data[0] >= 0:
+            capacity -= data[0]
+            total_value += data[1]
+            details.append([data[0], data[1], 1])
+        else:
+            fraction = capacity / data[0]
+            total_value += data[1] * fraction
+            details.append([data[0], data[1], fraction])
+            break
 
-nums = [4, 1, 7, 3, 8, 5]
-heap = []
+    return total_value, details
 
-for num in nums:
-  heapq.heappush(heap, (-num, num))  # (우선 순위, 값)
-
-while heap:
-  print(heapq.heappop(heap)[1])  # index 1
+if __name__ == "__main__":
+    
+    data_list = [(10, 10), (15, 12), (20, 10), (25, 8), (30, 5)]
+    print(get_max_value(data_list, 30))
