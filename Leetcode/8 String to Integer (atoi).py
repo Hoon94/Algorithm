@@ -1,22 +1,35 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
-        res = 0
+        res = '0'
         sign = 1
-        digit = [str(i) for i in range(10)]
+        maxres = 2 ** 31 - 1
+        minres = -2 ** 31
         
         # 1 condition
         s = s.strip()
         
-        for i, char in enumerate(s):
-            # 2 condition
-            if char == '-' and i + 1 < len(s) and s[i + 1] in digit:
-                sign = -1
-                print(char, sign)
-            
+        if len(s) < 1:
+            return 0
+        
+        # 2 condition
+        if s[0] == '-':
+            sign = -1
+            s = s[1:]
+        elif s[0] == '+':
+            s = s[1:]
+
+        for char in s:                 
             # 3 condition
-            if char in digit:
-                pass
+            if char.isdigit():
+                res += char
+            else:
+                break
+                
+        res = int(res) * sign
         
-        
-        
-        return res
+        if minres <= res <= maxres:
+            return res
+        elif res < minres:
+            return minres
+        else:
+            return maxres
