@@ -1,3 +1,14 @@
-a = ['a', 'b', 'c', 'd', 'e']
-b = {i : j for i, j in enumerate(a)}
-print(b)
+def star(func):
+    def inner(*args, **kwargs):
+        print("*" * 30)
+        func(*args, **kwargs)
+        print("*" * 30)
+    return inner
+
+
+@star
+def printer(msg):
+    print(msg)
+
+
+printer("Hello")
