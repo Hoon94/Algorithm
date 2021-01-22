@@ -1,14 +1,15 @@
-def star(func):
-    def inner(*args, **kwargs):
-        print("*" * 30)
-        func(*args, **kwargs)
-        print("*" * 30)
-    return inner
+import logging
 
+if __name__ == '__main__':
+    logger = logging.getLogger("main")
+    logging.basicConfig(level=logging.DEBUG)
+    # logger.setLevel(logging.INFO)
 
-@star
-def printer(msg):
-    print(msg)
+    # steam_handler = logging.FileHandler("my.log", mode = "a", encoding="utf8")
+    # logging.addHandler(steam_handler)
 
-
-printer("Hello")
+    logger.debug("틀렸어")
+    logger.info("확인해")
+    logger.warning("조심해")
+    logger.error("에러났어")
+    logger.critical("망했다")
