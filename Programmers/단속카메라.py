@@ -1,5 +1,5 @@
 def solution(routes):
-    routes = sorted(routes, key = lambda x: x[1])
+    routes = sorted(routes, key=lambda x: x[1])
     last_camera = -30000
 
     answer = 0
@@ -11,10 +11,11 @@ def solution(routes):
 
     return answer
 
+
 if __name__ == "__main__":
-    
-    #Test case 1
-    routes = [[-20,15], [-14,-5], [-18,-13], [-5,-3]]
-    #result 2
+
+    # Test case 1
+    routes = [[-20, 15], [-14, -5], [-18, -13], [-5, -3]]
+    # result 2
 
     print(solution(routes))
