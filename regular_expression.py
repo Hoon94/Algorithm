@@ -1,10 +1,11 @@
 import re
 
+
 def solve(s, p):
     pattern = re.compile(f'{p}')
 
-    #print([pattern])
-    #print(pattern.match('aaac'))
+    # print([pattern])
+    # print(pattern.match('aaac'))
     print(pattern)
     result = pattern.match(s).group() if pattern.match(s) else None
     print(result)
@@ -13,6 +14,7 @@ def solve(s, p):
         return True
     else:
         return False
+
 
 s = 'ab'
 p = '.*c'
