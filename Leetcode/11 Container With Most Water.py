@@ -8,14 +8,19 @@ class Solution:
         Returns:
             int: 가장 큰 넓이 값을 반환.
         """
-        result = 0
 
-        for i, i_height in enumerate(height):
-            for j, j_height in enumerate(height[i+1:], i + 1):
-                x = j - i
-                y = min(i_height, j_height)
-                if x * y >= result:
-                    #print(i, i_height, j, j_height, x, y)
-                    result = x * y
+        result = 0
+        start = 0
+        end = len(height) - 1
+
+        while start < end:
+            if height[start] > height[end]:
+                area = (end - start) * height[end]
+                end -= 1
+            else:
+                area = (end - start) * height[start]
+                start += 1
+
+            result = max(result, area)
 
         return result
