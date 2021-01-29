@@ -10,7 +10,6 @@ class Solution:
         """
 
         result = set()
-        nums.sort()
 
         n, p, z = [], [], []
         for num in nums:
@@ -35,12 +34,12 @@ class Solution:
             for j in range(i + 1, len(n)):
                 target = -(n[i] + n[j])
                 if target in P:
-                    result.add((n[i], n[j], target))
+                    result.add(tuple(sorted([n[i], n[j], target])))
 
         for i in range(len(p)):
             for j in range(i + 1, len(p)):
                 target = -(p[i] + p[j])
                 if target in N:
-                    result.add((p[i], p[j], target))
+                    result.add(tuple(sorted([p[i], p[j], target])))
 
         return result
