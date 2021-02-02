@@ -15,27 +15,26 @@ class Solution:
         """
 
         res = 10 ** 4 + 1
-        left, right = target, target
+        nums.sort()
+        n = len(nums)
 
-        unique = set(nums)
+        for i in range(n - 2):
+            left = i + 1
+            right = n - 1
 
-        while target != res:
-            # target go right
-            for i in range(len(nums) - 1):
-                for j in range(i + 1, len(nums)):
-                    if right - (nums[i] + nums[j]) in unique - set([nums[i], nums[j]]):
-                        #print("1:{},{},{},{}".format(right - (nums[i] + nums[j]), nums[i], nums[j], right))
-                        res = right
+            while left < right:
+                closest = sum([nums[i], nums[left], nums[right]])
+                diff = closest - target
 
-            right += 1
+                if abs(diff) < res:
+                    out = [nums[i], nums[left], nums[right]]
+                    res = abs(diff)
 
-            # target go left
-            for i in range(len(nums) - 1):
-                for j in range(i + 1, len(nums)):
-                    if left - (nums[i] + nums[j]) in unique - set([nums[i], nums[j]]):
-                        #print("2 {}".format(left))
-                        res = left
+                if diff == 0:
+                    return sum(out)
+                elif diff > 0:
+                    right -= 1
+                elif diff < 0:
+                    left += 1
 
-            left -= 1
-
-        return res
+        return sum(out)
