@@ -17,19 +17,25 @@ class Solution:
             List[str]: all possible letter combinations
 
         Result:
-            Runtime: 36 ms, faster than 19.99% of Python3 online submissions for Letter Combinations of a Phone Number.
-            Memory Usage: 14.4 MB, less than 36.18% of Python3 online submissions for Letter Combinations of a Phone Number.
+            Runtime: 24 ms, faster than 96.27% of Python3 online submissions for Letter Combinations of a Phone Number.
+            Memory Usage: 14.4 MB, less than 36.22% of Python3 online submissions for Letter Combinations of a Phone Number.
         """
 
-        result = [''] if digits else []
+        if not digits:
+            return []
 
-        for digit in digits:
-            temp = []
+        res = []
+        stack = [(0, "")]
 
-            for word in result:
-                for c in self.phone[int(digit)]:
-                    temp.append(word + c)
+        while stack:
+            i, combo = stack.pop()
+            if i == len(digits):
+                res.append(combo)
+            else:
+                nextDigit = int(digits[i])
+                letters = self.phone[nextDigit]
 
-            result = temp
+                for letter in letters:
+                    stack.append((i + 1, combo + letter))
 
-        return result
+        return res
