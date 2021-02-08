@@ -14,6 +14,10 @@ class Solution:
 
         Returns:
             ListNode: remake head
+
+        Result:
+            Runtime: 28 ms, faster than 93.43% of Python3 online submissions for Remove Nth Node From End of List.
+            Memory Usage: 14.4 MB, less than 19.36% of Python3 online submissions for Remove Nth Node From End of List.
         """
 
         front = head
