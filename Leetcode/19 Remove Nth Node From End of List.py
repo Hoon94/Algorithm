@@ -4,19 +4,34 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        ret = head
-        length = head
-        l = 1
+    def removeNthFromEnd(self, head, n: int):
+        """[summary]
+            Given the head of a linked list, remove the nth node from the end of the list and return its head.
 
-        while length.next:
-            l += 1
-            length = length.next
+        Args:
+            head (ListNode): 1 <= nodesize <= 30, 0 <= Node.val <= 100
+            n (int): 1 <= n <= nodesize
 
-        target = l - n
-        for i in range(target - 1):
-            ret = ret.next
+        Returns:
+            ListNode: remake head
+        """
 
-        ret.next = ret.next.next
+        front = head
+        back = head
 
+        # advance front to nth position
+        for i in range(n):
+            front = front.next
+
+        if not front:
+            return head.next
+
+        # then advance both front and back now they are nth postions apart
+        # when front gets to None, back will be just before the item to be deleted
+        while front.next:
+            back = back.next
+            front = front.next
+
+        # delete the node
+        back.next = back.next.next
         return head
