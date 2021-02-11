@@ -16,8 +16,8 @@ class Solution:
             ListNode: sorted list.
 
         Result:
-            Runtime: 40 ms, faster than 50.15% of Python3 online submissions for Merge Two Sorted Lists.
-            Memory Usage: 14.1 MB, less than 87.24% of Python3 online submissions for Merge Two Sorted Lists.
+            Runtime: 28 ms, faster than 98.17% of Python3 online submissions for Merge Two Sorted Lists.
+            Memory Usage: 14.2 MB, less than 87.21% of Python3 online submissions for Merge Two Sorted Lists.
         """
 
         ret = ListNode()
@@ -25,10 +25,10 @@ class Solution:
 
         while l1 and l2:
             if l1.val < l2.val:
-                head.next = ListNode(l1.val)
+                head.next = l1
                 l1 = l1.next
             else:
-                head.next = ListNode(l2.val)
+                head.next = l2
                 l2 = l2.next
 
             head = head.next
