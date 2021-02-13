@@ -1,5 +1,21 @@
 class Solution:
-    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+    def fourSum(self, nums: list, target: int) -> list:
+        """[summary]
+            Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target?
+            Find all unique quadruplets in the array which gives the sum of target.
+
+        Args:
+            nums (List[int]): 0 <= nums.length <= 200, -109 <= nums[i] <= 109
+            target (int): -109 <= target <= 109
+
+        Returns:
+            List[List[int]]: the solution set must not contain duplicate quadruplets.
+
+        Result:
+            Runtime: 1620 ms, faster than 12.13% of Python3 online submissions for 4Sum.
+            Memory Usage: 14.5 MB, less than 32.48% of Python3 online submissions for 4Sum.
+        """
+
         ret = set()
         nums.sort()
         n = len(nums)
