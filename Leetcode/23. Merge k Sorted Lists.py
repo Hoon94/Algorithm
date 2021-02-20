@@ -1,3 +1,13 @@
+from typing import List
+
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         """[summary]
@@ -12,31 +22,23 @@ class Solution:
             ListNode: Merge all the linked-lists into one sorted linked-list and return it.
 
         Result:
-            Runtime: 116 ms, faster than 51.23% of Python3 online submissions for Merge k Sorted Lists.
-            Memory Usage: 23.7 MB, less than 5.03% of Python3 online submissions for Merge k Sorted Lists.
+            Runtime: 96 ms, faster than 86.18% of Python3 online submissions for Merge k Sorted Lists.
+            Memory Usage: 18.4 MB, less than 28.27% of Python3 online submissions for Merge k Sorted Lists.
         """
 
-        def listVals(node):
-            while node:
-                yield node.val
-                node = node.next
+        res = []
 
-        def merged():
-            heap = []
-            iters = list(map(listVals, lists))
-            for i, it in enumerate(iters):
-                if (v := next(it, None)) is not None:
-                    heapq.heappush(heap, (v, i))
-            while heap:
-                v, i = heapq.heappop(heap)
-                yield v
-                if (v := next(iters[i], None)) is not None:
-                    heapq.heappush(heap, (v, i))
+        for x in lists:
+            while x:
+                res.append(x.val)
+                x = x.next
 
-        dummy = ListNode()
-        p = dummy
-        for val in merged():
-            node = ListNode(val)
-            p.next = node
-            p = p.next
-        return dummy.next
+        res = sorted(res)
+        head = ListNode()
+        node = head
+
+        for x in res:
+            node.next = ListNode(x)
+            node = node.next
+
+        return head.next
