@@ -24,7 +24,11 @@ class Solution:
             Memory Usage: 14.2 MB, less than 49.40% of Python3 online submissions for Remove Element.
         """
 
-        for i in range(nums.count(val)):
-            nums.remove(val)
+        i = 0
 
-        return len(nums)
+        for x in nums:
+            if x != val:
+                nums[i] = x
+                i += 1
+
+        return i
