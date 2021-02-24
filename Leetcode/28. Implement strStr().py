@@ -16,10 +16,10 @@ class Solution:
             int: Return the index
 
         Result:
-            Runtime: 24 ms, faster than 96.84% of Python3 online submissions for Implement strStr().
-            Memory Usage: 14.3 MB, less than 91.89% of Python3 online submissions for Implement strStr().
+            Runtime: 20 ms, faster than 99.24% of Python3 online submissions for Implement strStr().
+            Memory Usage: 14.5 MB, less than 19.75% of Python3 online submissions for Implement strStr().
         """
 
-        ret = haystack.index(needle) if needle in haystack else -1
+        ret = haystack.find(needle)
 
         return ret
