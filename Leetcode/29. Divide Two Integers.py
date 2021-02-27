@@ -1,5 +1,27 @@
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
+        """[summary]
+            Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
+            Return the quotient after dividing dividend by divisor.
+            The integer division should truncate toward zero, which means losing its fractional part.
+            For example, truncate(8.345) = 8 and truncate(-2.7335) = -2.
+
+            Note:
+            Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−231,  231 − 1].
+            For this problem, assume that your function returns 231 − 1 when the division result overflows.
+
+        Args:
+            dividend (int): -231 <= dividend, divisor <= 231 - 1
+            divisor (int): divisor != 0
+
+        Returns:
+            int: quotient after dividing dividend by divisor.
+
+        Result:
+            Runtime: 36 ms, faster than 52.92% of Python3 online submissions for Divide Two Integers.
+            Memory Usage: 14.3 MB, less than 58.58% of Python3 online submissions for Divide Two Integers.
+        """
+
         positive = (dividend < 0) is (divisor < 0)
         dividend, divisor = abs(dividend), abs(divisor)
         res = 0
