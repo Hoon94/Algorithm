@@ -18,24 +18,25 @@ class Solution:
             int: quotient after dividing dividend by divisor.
 
         Result:
-            Runtime: 36 ms, faster than 52.92% of Python3 online submissions for Divide Two Integers.
-            Memory Usage: 14.3 MB, less than 58.58% of Python3 online submissions for Divide Two Integers.
+            Runtime: 24 ms, faster than 97.98% of Python3 online submissions for Divide Two Integers.
+            Memory Usage: 14.2 MB, less than 83.72% of Python3 online submissions for Divide Two Integers.
         """
 
-        positive = (dividend < 0) is (divisor < 0)
-        dividend, divisor = abs(dividend), abs(divisor)
-        res = 0
+        is_negative = (dividend < 0) != (divisor < 0)
+        divisor, dividend = abs(divisor), abs(dividend)
 
-        while dividend >= divisor:
-            temp, i = divisor, 1
+        quotient = 0
+        the_sum = divisor
 
-            while dividend >= temp:
-                dividend -= temp
-                res += i
-                i <<= 1
-                temp <<= 1
+        while the_sum <= dividend:
+            current_quotient = 1
 
-        if not positive:
-            res = -res
+            while (the_sum << 1) <= dividend:
+                the_sum <<= 1
+                current_quotient <<= 1
 
-        return min(max(-2147483648, res), 2147483647)
+            dividend -= the_sum
+            the_sum = divisor
+            quotient += current_quotient
+
+        return min(2147483647, max(-quotient if is_negative else quotient, -2147483648))
