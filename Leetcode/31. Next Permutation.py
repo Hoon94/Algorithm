@@ -1,5 +1,18 @@
 class Solution:
     def nextPermutation(self, nums):
+        """[summary]
+            Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
+            If such an arrangement is not possible, it must rearrange it as the lowest possible order (i.e., sorted in ascending order).
+            The replacement must be in place and use only constant extra memory.
+
+        Args:
+            nums ([type]): 1 <= nums.length <= 100, 0 <= nums[i] <= 100
+
+        Result:
+            Runtime: 40 ms, faster than 83.75% of Python3 online submissions for Next Permutation.
+            Memory Usage: 14.3 MB, less than 57.40% of Python3 online submissions for Next Permutation.
+        """
+
         i = len(nums) - 1
 
         while i > 0:
@@ -14,5 +27,6 @@ class Solution:
             if nums[j] > nums[i]:
                 break
             j -= 1
+
         nums[i], nums[j] = nums[j], nums[i]
         nums[i + 1:] = sorted(nums[i + 1:])
