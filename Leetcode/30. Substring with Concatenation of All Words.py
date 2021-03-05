@@ -25,11 +25,13 @@ class Solution:
         # initialize d, l, ans
         l = len(words[0])
         d = {}
+
         for w in words:
             if w in d:
                 d[w] += 1
             else:
                 d[w] = 1
+
         i = 0
         ans = []
 
