@@ -22,18 +22,17 @@ class Solution:
 
         if len(words) == 0:
             return []
+
         # initialize d, l, ans
         l = len(words[0])
         d = {}
+        ans = []
 
         for w in words:
             if w in d:
                 d[w] += 1
             else:
                 d[w] = 1
-
-        i = 0
-        ans = []
 
         # sliding window(s)
         for k in range(l):
