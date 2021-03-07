@@ -9,8 +9,8 @@ class Solution:
             nums ([type]): 1 <= nums.length <= 100, 0 <= nums[i] <= 100
 
         Result:
-            Runtime: 40 ms, faster than 83.75% of Python3 online submissions for Next Permutation.
-            Memory Usage: 14.3 MB, less than 57.40% of Python3 online submissions for Next Permutation.
+            Runtime: 32 ms, faster than 99.08% of Python3 online submissions for Next Permutation.
+            Memory Usage: 14.2 MB, less than 57.40% of Python3 online submissions for Next Permutation.
         """
 
         i = len(nums) - 1
