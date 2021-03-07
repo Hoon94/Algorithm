@@ -16,40 +16,34 @@ class Solution:
             List[int]: Return all starting indices of substring(s)
 
         Result:
-            Runtime: 68 ms, faster than 92.66% of Python3 online submissions for Substring with Concatenation of All Words.
-            Memory Usage: 14.6 MB, less than 59.28% of Python3 online submissions for Substring with Concatenation of All Words.
+            Runtime: 60 ms, faster than 97.46% of Python3 online submissions for Substring with Concatenation of All Words.
+            Memory Usage: 14.5 MB, less than 82.78% of Python3 online submissions for Substring with Concatenation of All Words.
         """
 
         if len(words) == 0:
             return []
 
-        # initialize d, l, ans
+        # initialize words_dict, l, ans
         l = len(words[0])
-        d = {}
+        words_dict = {}
         ans = []
 
-        for w in words:
-            if w in d:
-                d[w] += 1
-            else:
-                d[w] = 1
+        for word in words:
+            words_dict[word] = words_dict.get(word, 0) + 1
 
         # sliding window(s)
         for k in range(l):
             left = k
             subd = {}
             count = 0
-            for j in range(k, len(s)-l+1, l):
-                tword = s[j:j+l]
+            for j in range(k, len(s) - l + 1, l):
+                tword = s[j:j + l]
                 # valid word
-                if tword in d:
-                    if tword in subd:
-                        subd[tword] += 1
-                    else:
-                        subd[tword] = 1
+                if tword in words_dict:
+                    subd[tword] = subd.get(tword, 0) + 1
                     count += 1
-                    while subd[tword] > d[tword]:
-                        subd[s[left:left+l]] -= 1
+                    while subd[tword] > words_dict[tword]:
+                        subd[s[left:left + l]] -= 1
                         left += l
                         count -= 1
                     if count == len(words):
