@@ -1,4 +1,4 @@
-n = int(input())
+n = input()
 coins = list(map(int, input().split()))
 answer = 1
 coins.sort()
