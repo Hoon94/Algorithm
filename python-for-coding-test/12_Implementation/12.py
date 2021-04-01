@@ -1,16 +1,18 @@
 def solution(n, build_frame):
     answer = [[]]
-    board = [[0] * (n + 1) for _ in range(n + 1)]
+    board = [[1] * (n + 1)] + [[0] * (n + 1) for _ in range(n)]
+    print(board)
 
     for frame in range(build_frame):
-        x, y, a, b = frame.split()
+        y, x, a, b = frame.split()
 
         if a == 0:  # 기둥
-            if b == 0:  # 삭제
-                board[x][y] = 0
-                board[x][y + 1] = 0
-            else:  # 설치
-                board[x][y] = 1
+            if b == 0 and board[x][y + 1] == 0:  # 삭제
+                if x != 0:
+                    board[x][y] = 0
+                # board[x][y + 1] = 0
+            elif b == 1 and board[x][y] == 1:  # 설치
+                # board[x][y] = 1
                 board[x][y + 1] = 1
 
         else:  # 보
