@@ -1,14 +1,14 @@
-from collections import deque
+from collections import deque, defaultdict
 import sys
 input = sys.stdin.readline
 
 n, m, k, x = map(int, input().split())
-graph = dict()
+graph = defaultdict(list)
 answer = []
 
 for _ in range(m):
     start, end = map(int, input().split())
-    graph[start] = graph.get(start, []) + [end]
+    graph[start] += [end]
 
 queue = deque([(x, 0)])
 visited = [x]
@@ -16,7 +16,7 @@ visited = [x]
 while queue:
     start, distance = queue.popleft()
     distance += 1
-    for i in graph.get(start, []):
+    for i in graph[start]:
         if i not in visited:
             if distance == k:
                 answer.append(i)
