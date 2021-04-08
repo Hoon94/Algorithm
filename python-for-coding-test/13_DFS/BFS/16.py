@@ -1,3 +1,9 @@
+# https://www.acmicpc.net/problem/14502
+from copy import deepcopy
+import sys
+input = sys.stdin.readline
+
+
 def dfs(x, y, arr):
     for i in range(4):
         nx = x + dx[i]
@@ -21,22 +27,23 @@ def getSafeArea(arr):
 
 def setWall(start, cnt, arr):
     global result
+    wall = deepcopy(arr)
 
     if cnt == 3:
         for i in virusList:
-            dfs(i[0], i[1], arr)
+            dfs(i[0], i[1], wall)
 
-        result = max(result, getSafeArea(arr))
+        result = max(result, getSafeArea(wall))
         return
 
     for i in range(start, n * m):
         x = i // m
         y = i % m
 
-        if arr[x][y] == 0:
-            arr[x][y] = 1
-            setWall(i + 1, cnt + 1, arr)
-            arr[x][y] = 0
+        if wall[x][y] == 0:
+            wall[x][y] = 1
+            setWall(i + 1, cnt + 1, wall)
+            wall[x][y] = 0
 
 
 n, m = map(int, input().split())
