@@ -1,4 +1,3 @@
-# https://www.acmicpc.net/problem/14502
 from copy import deepcopy
 import sys
 input = sys.stdin.readline
