@@ -1,3 +1,4 @@
+# https://www.acmicpc.net/problem/14888
 n = int(input())
 # 연산을 수행하고자 하는 수 리스트
 data = list(map(int, input().split()))
