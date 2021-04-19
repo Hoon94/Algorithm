@@ -3,7 +3,6 @@ board = []
 teachers = []
 obstacle = []
 result = "NO"
-
 move = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 
 for i in range(n):
@@ -24,13 +23,11 @@ def check():
                     return False
                 x += move[i][0]
                 y += move[i][1]
-
     return True
 
 
 def dfs(count):
     global result
-
     if count > 3:
         return
     if count == 3:
@@ -44,11 +41,9 @@ def dfs(count):
         for j in range(n):
             if board[i][j] == 'X':
                 board[i][j] = 'O'
-                obstacle.append((i, j))
                 dfs(count + 1)
                 if result == "YES":
                     return
-                obstacle.remove((i, j))
                 board[i][j] = 'X'
 
 
