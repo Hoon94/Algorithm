@@ -3,9 +3,24 @@ from typing import List
 
 class Solution:
     def solveSudoku(self, board: List[List[str]]) -> None:
+        """[summary]
+        Write a program to solve a Sudoku puzzle by filling the empty cells.
+        A sudoku solution must satisfy all of the following rules:
+        1. Each of the digits 1-9 must occur exactly once in each row.
+        2. Each of the digits 1-9 must occur exactly once in each column.
+        3. Each of the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.
+
+        Args:
+            board (List[List[str]]): board.length == 9, board[i].length == 9, board[i][j] is a digit or '.'.
+
+        Returns:
+            It is guaranteed that the input board has only one solution.
+
+        Result:
+            Runtime: 2036 ms, faster than 5.02% of Python3 online submissions for Sudoku Solver.
+            Memory Usage: 14.3 MB, less than 72.67% of Python3 online submissions for Sudoku Solver.
         """
-        Do not return anything, modify board in-place instead.
-        """
+
         self.board = board
         self.solve()
 
