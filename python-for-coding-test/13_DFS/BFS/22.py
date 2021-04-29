@@ -32,7 +32,6 @@ def can_move(p1, p2, new_board):
 def solution(board):
     n = len(board)
     new_board = [[1] * (n + 2) for _ in range(n + 2)]
-    print(new_board)
     for i in range(n):
         for j in range(n):
             new_board[i + 1][j + 1] = board[i][j]
@@ -43,6 +42,7 @@ def solution(board):
     while q:
         p1, p2, count = q.popleft()
         if p1 == (n, n) or p2 == (n, n):
+            print(visited)
             return count
         for nxt in can_move(p1, p2, new_board):
             if nxt not in visited:
