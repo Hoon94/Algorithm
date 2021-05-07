@@ -1,8 +1,3 @@
-n = int(input())
-sequence = list(map(int, input().split()))
-length = len(sequence)
-
-
 def binary_search(start, end):
     if start > end:
         return -1
@@ -17,8 +12,11 @@ def binary_search(start, end):
         return binary_search(mid + 1, end)
 
 
-if sequence[-1] == length - 1:
-    print(length - 1)
+n = int(input())
+sequence = list(map(int, input().split()))
+
+if sequence[-1] == n - 1:
+    print(n - 1)
 else:
-    result = binary_search(0, length - 1)
+    result = binary_search(0, n - 1)
     print(result)
