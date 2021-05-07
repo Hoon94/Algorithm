@@ -1,4 +1,4 @@
-def binary_search(start, end):
+def binary_search(sequence, start, end):
     if start > end:
         return -1
 
@@ -7,9 +7,9 @@ def binary_search(start, end):
     if sequence[mid] == mid:
         return mid
     elif sequence[mid] > mid:
-        return binary_search(start, mid - 1)
+        return binary_search(sequence, start, mid - 1)
     else:
-        return binary_search(mid + 1, end)
+        return binary_search(sequence, mid + 1, end)
 
 
 n = int(input())
@@ -18,5 +18,5 @@ sequence = list(map(int, input().split()))
 if sequence[-1] == n - 1:
     print(n - 1)
 else:
-    result = binary_search(0, n - 1)
+    result = binary_search(sequence, 0, n - 1)
     print(result)
