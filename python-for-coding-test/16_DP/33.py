@@ -1,20 +1,13 @@
+import sys
+
 n = int(input())
-t = []
-p = []
-dp = []
-
-for i in range(n):
-    a, b = map(int, input().split())
-    t.append(a)
-    p.append(b)
-    dp.append(b)
-
-dp.append(0)
+timeTable = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
+dp = [0 for _ in range(n + 1)]
 
 for i in range(n - 1, -1, -1):
-    if t[i] + i > n:
+    if i + timeTable[i][0] > n:
         dp[i] = dp[i + 1]
     else:
-        dp[i] = max(dp[i + 1], p[i] + dp[i + t[i]])
+        dp[i] = max(timeTable[i][1] + dp[i + timeTable[i][0]], dp[i + 1])
 
 print(dp[0])
