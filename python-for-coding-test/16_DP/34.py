@@ -2,9 +2,9 @@ n = int(input())
 array = list(map(int, input().split()))
 dp = [1] * n
 
-for i in range(n):
+for i in range(1, n):
     for j in range(i):
-        if array[j] > array[i] and dp[j] + 1 > dp[i]:
-            dp[i] = dp[j] + 1
+        if array[j] > array[i]:
+            dp[i] = max(dp[j] + 1, dp[i])
 
 print(n - max(dp))
