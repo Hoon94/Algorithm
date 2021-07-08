@@ -1,26 +1,20 @@
-# 5가 몇번 나누어지는지를 구한다.
-def fiveCount(n):
-    answer = 0
-    while n != 0:
-        n = n // 5
-        answer += n
-    return answer
+N, M = map(int, input().split())
 
 
-# 2가 몇번 나누어지는지를 구한다.
-def twoCount(n):
-    answer = 0
-    while n != 0:
-        n = n // 2
-        answer += n
-    return answer
+# 진짜 팩토리얼로 구해서 문제를 해결하게 되면 시간초과 발생
+# 끝자리가 0이라는 것은 10의 배수
+# 10은 2와 5로 구성되어 있음
+# 2와 5 짝이 맞아야 10이 되므로 2의 개수와 5의 개수중 더 작은게 10의 개수이다.
+def count_number(n, k):
+    count = 0
+    while n:
+        n //= k
+        count += n
+    return count
 
 
-n, m = map(int, input().split())
+five_count = count_number(N, 5) - count_number(M, 5) - count_number(N - M, 5)
+two_count = count_number(N, 2) - count_number(M, 2) - count_number(N - M, 2)
 
-if m == 0:
-    print(0)
-else:
-    # 2와 5의 개수를 nCm을 구할 때처럼 구해서 더 작은 개수를 선택한다.
-    print(min(twoCount(n) - twoCount(m) - twoCount(n - m),
-              fiveCount(n) - fiveCount(m) - fiveCount(n - m)))
+answer = min(five_count, two_count)
+print(answer)
