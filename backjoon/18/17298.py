@@ -1,16 +1,13 @@
-numbers = int(input())
-num_list = list(map(int, input().split()))
-stack = []
-result = [-1 for _ in range(numbers)]
+from collections import deque
 
-for i in range(len(num_list)):
-    try:
-        while num_list[stack[-1]] < num_list[i]:
-            result[stack.pop()] = num_list[i]
-    except:
-        pass
-        
+N = int(input())
+nums = list(map(int, input().split()))
+stack = deque()
+res = [-1] * N
+
+for i in range(N):
+    while stack and nums[stack[-1]] < nums[i]:
+        res[stack.pop()] = nums[i]
     stack.append(i)
-        
-for i in range(numbers):
-    print(result[i], end = ' ')
+
+print(*res)
