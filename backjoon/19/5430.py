@@ -1,37 +1,38 @@
-for i in range(int(input())):
-    q = input()
-    arr_len = int(input())
-    if(arr_len == 0):
-        input_arr = input()
-        input_arr = []
-    else:
-        input_arr = list(map(int, input()[1:-1].split(',')))
+import sys
+from collections import deque
 
-    is_reverse = False
-    is_ok = True
-    front = 0
-    rear = 0
+t = int(input())
 
-    for act in q:
-        try:
-            if(act == 'R'):
-                is_reverse = not is_reverse
-            elif(act == 'D' and not is_reverse):
-                front += 1
-            elif(act == 'D' and is_reverse):
-                rear += 1
-        except:
-            is_ok = False
-            print('error')
-            break
+for i in range(t):
+    p = sys.stdin.readline().rstrip()
+    n = int(input())
+    arr = sys.stdin.readline().rstrip()[1:-1].split(",")
+    queue = deque(arr)
 
-    if(is_ok):
-        if(front + rear <= arr_len):
-            if(not is_reverse):
-                input_arr = input_arr[front:arr_len - rear]
-                print(str(input_arr).replace(' ', ''))
+    rev, front, back = 0, 0, len(queue) - 1
+    flag = 0
+    if n == 0:
+        queue = []
+        front = 0
+        back = 0
+
+    for j in p:
+        if j == 'R':
+            rev += 1
+        elif j == 'D':
+            if len(queue) < 1:
+                flag = 1
+                print("error")
+                break
             else:
-                input_arr = input_arr[::-1][rear:arr_len - front]
-                print(str(input_arr).replace(' ', ''))
+                if rev % 2 == 0:
+                    queue.popleft()
+                else:
+                    queue.pop()
+
+    if flag == 0:
+        if rev % 2 == 0:
+            print("[" + ",".join(queue) + "]")
         else:
-            print('error')
+            queue.reverse()
+            print("[" + ",".join(queue) + "]")
