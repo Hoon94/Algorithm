@@ -1,15 +1,10 @@
 from sys import stdin
+from collections import Counter
 
 _ = stdin.readline()
-N = map(int, stdin.readline().split())
+N = stdin.readline().split()
 _ = stdin.readline()
-M = map(int, stdin.readline().split())
-hashmap = {}
+M = stdin.readline().split()
 
-for n in N:
-    if n in hashmap:
-        hashmap[n] += 1
-    else:
-        hashmap[n] = 1
-
-print(' '.join(str(hashmap[m]) if m in hashmap else '0' for m in M))
+C = Counter(N)
+print(' '.join(f'{C[m]}' if m in C else '0' for m in M))
