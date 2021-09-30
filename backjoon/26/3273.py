@@ -1,19 +1,26 @@
-import sys
+def binary_search(start, end, key):
+    if start > end:
+        return 0
 
-N = int(input())
-arr = list(map(int, sys.stdin.readline().split()))
-X = int(input())
-arr.sort()
-left, right = 0, N - 1
-ans = 0
+    mid = (start + end) // 2
 
-while left < right:
-    tmp = arr[left] + arr[right]
-    if tmp == X:
-        ans += 1
-    if tmp < X:
-        left += 1
+    if seq[mid] == key:
+        return 1
+    elif seq[mid] > key:
+        return binary_search(start, mid - 1, key)
+    elif seq[mid] < key:
+        return binary_search(mid + 1, end, key)
+
+
+n = int(input())
+seq = list(map(int, input().split()))
+x = int(input())
+answer = 0
+seq.sort()
+
+for num in seq:
+    if (num * 2) == x:
         continue
-    right -= 1
+    answer += binary_search(0, len(seq) - 1, x - num)
 
-print(ans)
+print(answer // 2)
