@@ -1,27 +1,30 @@
 import sys
+from math import inf
+
+
+def binary_search(arr):
+    i = 0
+    j = len(arr) - 1
+    r = inf
+
+    while i < j:
+        tmp = arr[i] + arr[j]
+        if tmp == 0:
+            return arr[i], arr[j]
+        if abs(tmp) < r:
+            result = (arr[i], arr[j])
+            r = abs(tmp)
+        if tmp > 0:
+            j -= 1
+        else:
+            i += 1
+
+    return result
+
 
 input = sys.stdin.readline
-N = int(input())
-liquid = [int(x) for x in input().split()]
-liquid.sort()
-left = 0
-right = N - 1
-answer = liquid[left] + liquid[right]
-al = left
-ar = right
+n = int(input())
+arr = sorted(list(map(int, input().split())))
+result = binary_search(arr)
 
-while left < right:
-    tmp = liquid[left] + liquid[right]
-
-    if abs(tmp) < abs(answer):
-        answer = tmp
-        al = left
-        ar = right
-        if answer == 0:
-            break
-    if tmp < 0:
-        left += 1
-    else:
-        right -= 1
-
-print(liquid[al], liquid[ar])
+print(result[0], result[1])
