@@ -1,4 +1,5 @@
 import sys
+import bisect
 input = sys.stdin.readline
 
 n, c = map(int, input().split())
@@ -27,13 +28,7 @@ for i in wl:
     if c - i < 0:
         continue
 
-    start, end = 0, len(wr)
-    while(start < end):
-        mid = (start + end) // 2
-        if wr[mid] <= c - i:
-            start = mid + 1
-        else:
-            end = mid
-    r += start
+    idx = bisect.bisect_right(wr, c - i)
+    r += idx
 
 print(r)
