@@ -1,8 +1,9 @@
-import regular_expression as re
-
-
 class Solution:
     def isNumber(self, s: str) -> bool:
-        engine = re.compile(r"^[+-]?((\d+\.?\d*)|(\d*\.?\d+))([eE][+-]?\d+)?$")
-
-        return engine.match(s.strip(" "))
+        try:
+            if 'inf' in s.lower() or s.isalpha():
+                return False
+            if float(s) or float(s) >= 0:
+                return True
+        except:
+            return False
