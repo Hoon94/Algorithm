@@ -1,6 +1,7 @@
 class Solution:
     def simplifyPath(self, path: str) -> str:
         stack = []
+
         for token in path.split('/'):
             if token in ('', '.'):
                 pass
