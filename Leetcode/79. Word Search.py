@@ -1,0 +1,27 @@
+from typing import List
+
+
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        def dfs(row, column, index):
+            if index == len(word):
+                return True
+
+            path.add((row, column))
+            for r, c in [(row - 1, column), (row, column - 1), (row, column + 1), (row + 1, column)]:
+                if r in range(M) and c in range(N) and board[r][c] == word[index] and (r, c) not in path:
+                    if dfs(r, c, index + 1):
+                        return True
+
+            path.remove((row, column))
+
+        M, N = len(board), len(board[0])
+        path = set()
+
+        for row in range(M):
+            for column in range(N):
+                if board[row][column] == word[0]:
+                    if dfs(row, column, 1):
+                        return True
+
+        return False
