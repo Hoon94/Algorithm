@@ -3,25 +3,25 @@ from typing import List
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        def dfs(row, column, index):
-            if index == len(word):
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if self.backtracking(i, j, word, board):
+                    return True
+
+        return False
+
+    def backtracking(self, i, j, word, board):
+        if len(word) == 0:
+            return True
+
+        if i < 0 or i >= len(board) or j < 0 or j >= len(board[i]):
+            return False
+
+        if board[i][j] == word[0]:
+            board[i][j] = "~"
+            if self.backtracking(i + 1, j, word[1:], board) or self.backtracking(i - 1, j, word[1:], board) or self.backtracking(i, j + 1, word[1:], board) or self.backtracking(i, j - 1, word[1:], board):
                 return True
 
-            path.add((row, column))
-            for r, c in [(row - 1, column), (row, column - 1), (row, column + 1), (row + 1, column)]:
-                if r in range(M) and c in range(N) and board[r][c] == word[index] and (r, c) not in path:
-                    if dfs(r, c, index + 1):
-                        return True
-
-            path.remove((row, column))
-
-        M, N = len(board), len(board[0])
-        path = set()
-
-        for row in range(M):
-            for column in range(N):
-                if board[row][column] == word[0]:
-                    if dfs(row, column, 1):
-                        return True
+            board[i][j] = word[0]
 
         return False
