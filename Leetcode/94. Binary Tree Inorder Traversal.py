@@ -11,26 +11,16 @@ class TreeNode:
 
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        res = []
-        self.helper(root, res)
-        return res
+        result, stack = [], [(root, False)]
 
-    def helper(self, root, res):
-        if root:
-            self.helper(root.left, res)
-            res.append(root.val)
-            self.helper(root.right, res)
+        while stack:
+            cur, visited = stack.pop()
+            if cur:
+                if visited:
+                    result.append(cur.val)
+                else:
+                    stack.append((cur.right, False))
+                    stack.append((cur, True))
+                    stack.append((cur.left, False))
 
-    def inorderTraversal(self, root):
-        res, stack = [], []
-        while True:
-            while root:
-                stack.append(root)
-                root = root.left
-
-            if not stack:
-                return res
-
-            node = stack.pop()
-            res.append(node.val)
-            root = node.right
+        return result
