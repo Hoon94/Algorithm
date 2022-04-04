@@ -11,17 +11,17 @@ class TreeNode:
 
 class Solution:
     def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
-        def node(val, left, right):
-            node = TreeNode(val)
-            node.left = left
-            node.right = right
+        def generate(first, last):
+            trees = []
 
-            return node
+            for root in range(first, last + 1):
+                for left in generate(first, root - 1):
+                    for right in generate(root + 1, last):
+                        node = TreeNode(root)
+                        node.left = left
+                        node.right = right
+                        trees += node
 
-        def trees(first, last):
-            return [node(root, left, right)
-                    for root in range(first, last + 1)
-                    for left in trees(first, root - 1)
-                    for right in trees(root + 1, last)] or [None]
+            return trees or [None]
 
-        return trees(1, n)
+        return generate(1, n)
