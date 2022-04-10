@@ -5,16 +5,20 @@ class Solution:
         if r + c != l:
             return False
 
-        dp = [True for _ in range(c + 1)]
+        stack, visited = [(0, 0)], set((0, 0))
 
-        for j in range(1, c + 1):
-            dp[j] = dp[j - 1] and s2[j - 1] == s3[j - 1]
+        while stack:
+            x, y = stack.pop()
 
-        for i in range(1, r + 1):
-            dp[0] = (dp[0] and s1[i - 1] == s3[i - 1])
+            if x + y == l:
+                return True
 
-            for j in range(1, c + 1):
-                dp[j] = (dp[j] and s1[i - 1] == s3[i - 1 + j]) or \
-                    (dp[j - 1] and s2[j - 1] == s3[i - 1 + j])
+            if x + 1 <= r and s1[x] == s3[x + y] and (x + 1, y) not in visited:
+                stack.append((x + 1, y))
+                visited.add((x + 1, y))
 
-        return dp[-1]
+            if y + 1 <= c and s2[y] == s3[x + y] and (x, y + 1) not in visited:
+                stack.append((x, y + 1))
+                visited.add((x, y + 1))
+
+        return False
