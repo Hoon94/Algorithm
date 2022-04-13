@@ -14,11 +14,7 @@ class Solution:
         output = []
         self.inorder(root, output)
 
-        for i in range(1, len(output)):
-            if output[i - 1] >= output[i]:
-                return False
-
-        return True
+        return output
 
     def inorder(self, root, output):
         if root is None:
