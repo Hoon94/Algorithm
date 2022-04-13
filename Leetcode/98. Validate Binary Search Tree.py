@@ -12,14 +12,15 @@ class TreeNode:
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         output = []
-        self.inorder(root, output)
+        stack = []
+
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                temp = stack.pop()
+                output.append(temp.val)
+                root = temp.right
 
         return output
-
-    def inorder(self, root, output):
-        if root is None:
-            return
-
-        self.inorder(root.left, output)
-        output.append(root.val)
-        self.inorder(root.right, output)
