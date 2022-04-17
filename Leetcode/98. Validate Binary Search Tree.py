@@ -11,16 +11,15 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        if root is None:
+            return []
+
+        stack = [root]
         output = []
-        self.dfs(root, output)
+
+        while stack:
+            temp = stack.pop()
+            output.append(temp.val)
+            stack.extend(temp.children[::-1])
 
         return output
-
-    def dfs(self, root, output):
-        if root is None:
-            return
-
-        output.append(root.val)
-
-        for child in root.children:
-            self.dfs(child, output)
