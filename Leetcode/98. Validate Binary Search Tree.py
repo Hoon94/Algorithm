@@ -14,10 +14,10 @@ class Solution:
         output = []
         self.dfs(root, 0, output)
 
-        return output
+        return output[::-1]
 
     def dfs(self, root, level, output):
-        if not root:
+        if root is None:
             return
 
         if len(output) < level + 1:
