@@ -14,7 +14,7 @@ class Solution:
         output = []
         self.dfs(root, 0, output)
 
-        return output[::-1]
+        return output
 
     def dfs(self, root, level, output):
         if root is None:
@@ -24,5 +24,6 @@ class Solution:
             output.append([])
 
         output[level].append(root.val)
-        self.dfs(root.left, level + 1, output)
-        self.dfs(root.right, level + 1, output)
+
+        for child in root.children:
+            self.dfs(child, level + 1, output)
