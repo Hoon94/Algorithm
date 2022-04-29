@@ -14,6 +14,12 @@ class Solution:
         output = []
         self.dfs(root, 0, output)
 
+        for i in range(len(output)):
+            if i % 2 != 0:
+                output[i].reverse()
+            else:
+                continue
+
         return output
 
     def dfs(self, root, level, output):
@@ -24,6 +30,5 @@ class Solution:
             output.append([])
 
         output[level].append(root.val)
-
-        for child in root.children:
-            self.dfs(child, level + 1, output)
+        self.dfs(root.left, level + 1, output)
+        self.dfs(root.right, level + 1, output)
