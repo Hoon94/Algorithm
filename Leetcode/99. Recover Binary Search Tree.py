@@ -11,23 +11,20 @@ class TreeNode:
 
 class Solution:
     def recoverTree(self, root: Optional[TreeNode]) -> None:
-        self.first, self.second, self.prevNode = None, None, None
-        self.inOrder(root)
-        self.first.val, self.second.val = self.second.val, self.first.val
+        def inorderBST(root):
+            if not root:
+                return
 
-    def inOrder(self, root):
-        if not root:
-            return
+            inorderBST(root.left)
 
-        self.inOrder(root.left)
-
-        if self.prevNode:
-            if self.prevNode.val > root.val:
+            if self.prev and self.prev.val > root.val:
                 if not self.first:
-                    self.first = self.prevNode
-
+                    self.first = self.prev
                 self.second = root
 
-        self.prevNode = root
+            self.prev = root
+            inorderBST(root.right)
 
-        self.inOrder(root.right)
+        self.first = self.second = self.prev = None
+        inorderBST(root)
+        self.first.val, self.second.val = self.second.val, self.first.val
