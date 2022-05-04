@@ -10,13 +10,13 @@ class TreeNode:
 
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        def isSym(L, R):
-            if not L and not R:
-                return True
+        if not root:
+            return True
 
-            if L and R and L.val == R.val:
-                return isSym(L.left, R.right) and isSym(L.right, R.left)
+        return self.dfs(root.left, root.right)
 
-            return False
+    def dfs(self, l, r):
+        if l and r:
+            return l.val == r.val and self.dfs(l.left, r.right) and self.dfs(l.right, r.left)
 
-        return isSym(root, root)
+        return l == r
