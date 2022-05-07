@@ -10,21 +10,14 @@ class TreeNode:
 
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-        if not root:
-            return True
+        queue = [root]
 
-        stack = [(root.left, root.right)]
+        while queue:
+            values = [i.val if i else None for i in queue]
 
-        while stack:
-            l, r = stack.pop()
-
-            if not l and not r:
-                continue
-
-            if not l or not r or (l.val != r.val):
+            if values != values[::-1]:
                 return False
 
-            stack.append((l.left, r.right))
-            stack.append((l.right, r.left))
+            queue = [child for i in queue if i for child in (i.left, i.right)]
 
         return True
