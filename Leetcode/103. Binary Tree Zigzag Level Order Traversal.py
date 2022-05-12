@@ -21,23 +21,21 @@ class Solution:
 
         while queue:
             n = len(queue)
-            level = []
+            level = [0] * n
 
-            for _ in range(n):
+            for i in range(n):
                 node = queue.popleft()
-                level.append(node.val)
 
                 if node.left:
                     queue.append(node.left)
-
                 if node.right:
                     queue.append(node.right)
+                if even_level:
+                    level[n - 1 - i] = node.val
+                else:
+                    level[i] = node.val
 
-            if even_level:
-                res.append(level[::-1])
-            else:
-                res.append(level)
-
+            res.append(level)
             even_level = not even_level
 
         return res
