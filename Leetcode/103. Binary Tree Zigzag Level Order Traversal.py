@@ -15,31 +15,29 @@ class Solution:
         if not root:
             return []
 
-        queue = collections.deque([root])
         res = []
+        queue = collections.deque([root])
         even_level = False
 
         while queue:
             n = len(queue)
-            level = []
+            level = collections.deque()
 
             for _ in range(n):
+                node = queue.popleft()
+
                 if even_level:
-                    node = queue.pop()
-                    if node.right:
-                        queue.appendleft(node.right)
-                    if node.left:
-                        queue.appendleft(node.left)
+                    level.appendleft(node.val)
                 else:
-                    node = queue.popleft()
-                    if node.left:
-                        queue.append(node.left)
-                    if node.right:
-                        queue.append(node.right)
+                    level.append(node.val)
 
-                level.append(node.val)
+                if node.left:
+                    queue.append(node.left)
 
-            res.append(level)
+                if node.right:
+                    queue.append(node.right)
+
+            res.append(list(level))
             even_level = not even_level
 
         return res
