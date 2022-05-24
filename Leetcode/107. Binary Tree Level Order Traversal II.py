@@ -11,17 +11,24 @@ class TreeNode:
 
 class Solution:
     def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
-        queue, res = collections.deque([(root, 0)]), []
+        deque, ret = collections.deque(), []
 
-        while queue:
-            node, level = queue.popleft()
+        if root:
+            deque.append(root)
 
-            if node:
-                if len(res) < level + 1:
-                    res.insert(0, [])
+        while deque:
+            level, size = [], len(deque)
 
-                res[-(level + 1)].append(node.val)
-                queue.append((node.left, level + 1))
-                queue.append((node.right, level + 1))
+            for _ in range(size):
+                node = deque.popleft()
+                level.append(node.val)
 
-        return res
+                if node.left:
+                    deque.append(node.left)
+
+                if node.right:
+                    deque.append(node.right)
+
+            ret.append(level)
+
+        return ret[::-1]
