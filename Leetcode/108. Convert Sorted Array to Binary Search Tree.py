@@ -10,13 +10,13 @@ class TreeNode:
 
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-        if not nums:
-            return None
+        def rec(nums, start, end):
+            if start <= end:
+                mid = (start + end) // 2
+                node = TreeNode(nums[mid])
+                node.left = rec(nums, start, mid - 1)
+                node.right = rec(nums, mid + 1, end)
 
-        mid = len(nums) // 2
+                return node
 
-        root = TreeNode(nums[mid])
-        root.left = self.sortedArrayToBST(nums[:mid])
-        root.right = self.sortedArrayToBST(nums[mid + 1:])
-
-        return root
+        return rec(nums, 0, len(nums) - 1)
