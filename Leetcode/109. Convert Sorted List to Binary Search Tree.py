@@ -16,23 +16,23 @@ class TreeNode:
 
 class Solution:
     def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
-        if not head:
-            return
+        l, p = 0, head
 
-        if not head.next:
-            return TreeNode(head.val)
+        while p:
+            l += 1
+            p = p.next
 
-        dummy = ListNode(0)
-        dummy.next = head
-        slow, fast = dummy, head
+        return self.convert([head], 0, l - 1)
 
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+    def convert(self, head, start, end):
+        if start > end:
+            return None
 
-        root = TreeNode(slow.next.val)
-        root.right = self.sortedListToBST(slow.next.next)
-        slow.next = None
-        root.left = self.sortedListToBST(head)
+        mid = (start + end) >> 1
+        l = self.convert(head, start, mid - 1)
+        root = TreeNode(head[0].val)
+        root.left = l
+        head[0] = head[0].next
+        root.right = self.convert(head, mid + 1, end)
 
         return root
