@@ -22,17 +22,19 @@ class Solution:
             l += 1
             p = p.next
 
-        return self.convert([head], 0, l - 1)
+        self.node = head
 
-    def convert(self, head, start, end):
+        return self.convert(0, l - 1)
+
+    def convert(self, start, end):
         if start > end:
             return None
 
         mid = (start + end) >> 1
-        l = self.convert(head, start, mid - 1)
-        root = TreeNode(head[0].val)
+        l = self.convert(start, mid - 1)
+        root = TreeNode(self.node.val)
         root.left = l
-        head[0] = head[0].next
-        root.right = self.convert(head, mid + 1, end)
+        self.node = self.node.next
+        root.right = self.convert(mid + 1, end)
 
         return root
