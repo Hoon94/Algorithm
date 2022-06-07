@@ -10,18 +10,21 @@ class TreeNode:
 
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
-        res = []
-        self.dfs(root, sum, res)
+        if not root:
+            return False
 
-        return any(res)
+        stack = [(root, root.val)]
 
-    def dfs(self, root, target, res):
-        if root:
-            if not root.left and not root.right and root.val == target:
-                res.append(True)
+        while stack:
+            curr, val = stack.pop()
 
-            if root.left:
-                self.dfs(root.left, target - root.val, res)
+            if not curr.left and not curr.right and val == sum:
+                return True
 
-            if root.right:
-                self.dfs(root.right, target - root.val, res)
+            if curr.right:
+                stack.append((curr.right, val + curr.right.val))
+
+            if curr.left:
+                stack.append((curr.left, val + curr.left.val))
+
+        return False
