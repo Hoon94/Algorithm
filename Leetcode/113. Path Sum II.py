@@ -13,10 +13,20 @@ class Solution:
         if not root:
             return []
 
-        if not root.left and not root.right and sum == root.val:
-            return [[root.val]]
+        res = []
+        queue = [(root, root.val, [root.val])]
 
-        tmp = self.pathSum(root.left, sum - root.val) + \
-            self.pathSum(root.right, sum - root.val)
+        while queue:
+            curr, val, ls = queue.pop(0)
+            if not curr.left and not curr.right and val == sum:
+                res.append(ls)
 
-        return [[root.val] + i for i in tmp]
+            if curr.left:
+                queue.append(
+                    (curr.left, val + curr.left.val, ls + [curr.left.val]))
+
+            if curr.right:
+                queue.append(
+                    (curr.right, val + curr.right.val, ls + [curr.right.val]))
+
+        return res
