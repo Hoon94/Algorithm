@@ -14,19 +14,20 @@ class Solution:
             return []
 
         res = []
-        queue = [(root, root.val, [root.val])]
+        stack = [(root, sum - root.val, [root.val])]
 
-        while queue:
-            curr, val, ls = queue.pop(0)
-            if not curr.left and not curr.right and val == sum:
+        while stack:
+            curr, val, ls = stack.pop()
+
+            if not curr.left and not curr.right and val == 0:
                 res.append(ls)
 
-            if curr.left:
-                queue.append(
-                    (curr.left, val + curr.left.val, ls + [curr.left.val]))
-
             if curr.right:
-                queue.append(
-                    (curr.right, val + curr.right.val, ls + [curr.right.val]))
+                stack.append(
+                    (curr.right, val - curr.right.val, ls + [curr.right.val]))
+
+            if curr.left:
+                stack.append(
+                    (curr.left, val - curr.left.val, ls + [curr.left.val]))
 
         return res
