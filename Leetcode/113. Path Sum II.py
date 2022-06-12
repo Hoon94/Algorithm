@@ -14,20 +14,18 @@ class Solution:
             return []
 
         res = []
-        stack = [(root, sum - root.val, [root.val])]
+        stack = [(root, [root.val])]
 
         while stack:
-            curr, val, ls = stack.pop()
+            curr, ls = stack.pop()
 
-            if not curr.left and not curr.right and val == 0:
+            if not curr.left and not curr.right and sum(ls) == ls:
                 res.append(ls)
 
             if curr.right:
-                stack.append(
-                    (curr.right, val - curr.right.val, ls + [curr.right.val]))
+                stack.append((curr.right, ls + [curr.right.val]))
 
             if curr.left:
-                stack.append(
-                    (curr.left, val - curr.left.val, ls + [curr.left.val]))
+                stack.append((curr.left, ls + [curr.left.val]))
 
         return res
