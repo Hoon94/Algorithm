@@ -10,15 +10,18 @@ class TreeNode:
 
 class Solution:
     def flatten(self, root: Optional[TreeNode]) -> None:
-        curr = root
+        head, curr = None, root
 
-        while curr:
-            if curr.left:
-                runner = curr.left
+        while head != root:
+            if curr.right == head:
+                curr.right = None
 
-                while runner.right:
-                    runner = runner.right
+            if curr.left == head:
+                curr.left = None
 
-                runner.right, curr.right, curr.left = curr.right, curr.left, None
-
-            curr = curr.right
+            if curr.right:
+                curr = curr.right
+            elif curr.left:
+                curr = curr.left
+            else:
+                curr.right, head, curr = head, curr, root
