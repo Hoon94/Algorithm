@@ -9,19 +9,17 @@ class TreeNode:
 
 
 class Solution:
+    head = None
+
     def flatten(self, root: Optional[TreeNode]) -> None:
-        head, curr = None, root
+        def revPreOrder(node: TreeNode) -> None:
+            if node.right:
+                revPreOrder(node.right)
 
-        while head != root:
-            if curr.right == head:
-                curr.right = None
+            if node.left:
+                revPreOrder(node.left)
 
-            if curr.left == head:
-                curr.left = None
+            node.left, node.right, self.head = None, self.head, node
 
-            if curr.right:
-                curr = curr.right
-            elif curr.left:
-                curr = curr.left
-            else:
-                curr.right, head, curr = head, curr, root
+        if root:
+            revPreOrder(root)
