@@ -9,17 +9,17 @@ class TreeNode:
 
 
 class Solution:
-    head = None
+    prev = None
 
     def flatten(self, root: Optional[TreeNode]) -> None:
-        def revPreOrder(node: TreeNode) -> None:
-            if node.right:
-                revPreOrder(node.right)
+        if not root:
+            return
 
-            if node.left:
-                revPreOrder(node.left)
+        self.prev = root
+        self.flatten(root.left)
 
-            node.left, node.right, self.head = None, self.head, node
+        temp = root.right
+        root.right, root.left = root.left, None
+        self.prev.right = temp
 
-        if root:
-            revPreOrder(root)
+        self.flatten(temp)
