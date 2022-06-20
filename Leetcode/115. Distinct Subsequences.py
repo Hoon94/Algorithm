@@ -1,15 +1,13 @@
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
-        dp = [[0] * (len(s) + 1) for _ in range(len(t) + 1)]
+        l1, l2 = len(s) + 1, len(t) + 1
+        dp = [[1] * l2 for _ in range(l1)]
 
-        for col in range(len(dp[0])):
-            dp[0][col] = 1
+        for j in range(1, l2):
+            dp[0][j] = 0
 
-        for x in range(1, len(s) + 1):
-            for y in range(1, len(t) + 1):
-                if s[x - 1] == t[y - 1]:
-                    dp[y][x] = dp[y - 1][x - 1] + dp[y][x - 1]
-                else:
-                    dp[y][x] = dp[y][x - 1]
+        for i in range(1, l1):
+            for j in range(1, l2):
+                dp[i][j] = dp[i-1][j] + dp[i-1][j-1] * (s[i-1] == t[j-1])
 
         return dp[-1][-1]
