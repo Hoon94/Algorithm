@@ -11,11 +11,19 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
-        if root and root.left and root.right:
-            root.left.next = root.right
+        if not root:
+            return
 
-            if root.next:
-                root.right.next = root.next.left
+        queue = [root]
 
-            self.connect(root.left)
-            self.connect(root.right)
+        while queue:
+            curr = queue.pop(0)
+
+            if curr.left and curr.right:
+                curr.left.next = curr.right
+
+                if curr.next:
+                    curr.right.next = curr.next.left
+
+                queue.append(curr.left)
+                queue.append(curr.right)
