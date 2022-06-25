@@ -14,10 +14,10 @@ class Solution:
         if not root:
             return
 
-        queue = [root]
+        stack = [root]
 
-        while queue:
-            curr = queue.pop(0)
+        while stack:
+            curr = stack.pop()
 
             if curr.left and curr.right:
                 curr.left.next = curr.right
@@ -25,5 +25,5 @@ class Solution:
                 if curr.next:
                     curr.right.next = curr.next.left
 
-                queue.append(curr.left)
-                queue.append(curr.right)
+                stack.append(curr.right)
+                stack.append(curr.left)
