@@ -1,4 +1,6 @@
-# Definition for a Node.
+from collections import deque
+
+
 class Node:
     def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
         self.val = val
@@ -9,21 +11,28 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
-        tail = dummy = Node(0)
+        if not root:
+            return None
 
-        while node:
-            tail.next = node.left
+        q = deque()
+        q.append(root)
+        dummy = Node(-999)
 
-            if tail.next:
-                tail = tail.next
+        while q:
+            length = len(q)
+            prev = dummy
 
-            tail.next = node.right
+            for _ in range(length):
+                popped = q.popleft()
 
-            if tail.next:
-                tail = tail.next
+                if popped.left:
+                    q.append(popped.left)
+                    prev.next = popped.left
+                    prev = prev.next
 
-            node = node.next
+                if popped.right:
+                    q.append(popped.right)
+                    prev.next = popped.right
+                    prev = prev.next
 
-            if not node:
-                tail = dummy
-                node = dummy.next
+        return root
