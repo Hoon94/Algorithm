@@ -1,6 +1,3 @@
-from collections import deque
-
-
 class Node:
     def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
         self.val = val
@@ -14,25 +11,26 @@ class Solution:
         if not root:
             return None
 
-        q = deque()
-        q.append(root)
+        curr = root
         dummy = Node(-999)
+        head = root
 
-        while q:
-            length = len(q)
+        while head:
+            curr = head
             prev = dummy
 
-            for _ in range(length):
-                popped = q.popleft()
-
-                if popped.left:
-                    q.append(popped.left)
-                    prev.next = popped.left
+            while curr:
+                if curr.left:
+                    prev.next = curr.left
                     prev = prev.next
 
-                if popped.right:
-                    q.append(popped.right)
-                    prev.next = popped.right
+                if curr.right:
+                    prev.next = curr.right
                     prev = prev.next
+
+                curr = curr.next
+
+            head = dummy.next
+            dummy.next = None
 
         return root
