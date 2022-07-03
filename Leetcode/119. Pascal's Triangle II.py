@@ -3,10 +3,13 @@ from typing import List
 
 class Solution:
     def getRow(self, rowIndex: int) -> List[int]:
-        pascal = [1] * (rowIndex + 1)
+        ans = [1] * (rowIndex + 1)
+        up = rowIndex
+        down = 1
 
-        for i in range(2, rowIndex + 1):
-            for j in range(i - 1, 0, -1):
-                pascal[j] += pascal[j-1]
+        for i in range(1, rowIndex):
+            ans[i] = ans[i - 1] * up / down
+            up -= up
+            down += down
 
-        return pascal
+        return ans
