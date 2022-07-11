@@ -3,11 +3,13 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        cur_hold, cur_not_hold = -float('inf'), 0
+        if not prices or len(prices) is 1:
+            return 0
 
-        for stock_price in prices:
-            prev_hold, prev_not_hold = cur_hold, cur_not_hold
-            cur_hold = max(prev_hold, prev_not_hold - stock_price)
-            cur_not_hold = max(prev_not_hold, prev_hold + stock_price)
+        profit = 0
 
-        return cur_not_hold if prices else 0
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i - 1]:
+                profit += prices[i] - prices[i - 1]
+
+        return profit
