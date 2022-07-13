@@ -3,25 +3,13 @@ from typing import List
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        if not prices:
-            return 0
+        dp_2_hold, dp_2_not_hold = -float('inf'), 0
+        dp_1_hold, dp_1_not_hold = -float('inf'), 0
 
-        profits = []
-        max_profit = 0
-        current_min = prices[0]
+        for stock_price in prices:
+            dp_2_not_hold = max(dp_2_not_hold, dp_2_hold + stock_price)
+            dp_2_hold = max(dp_2_hold, dp_1_not_hold - stock_price)
+            dp_1_not_hold = max(dp_1_not_hold, dp_1_hold + stock_price)
+            dp_1_hold = max(dp_1_hold, 0 - stock_price)
 
-        for price in prices:
-            current_min = min(current_min, price)
-            max_profit = max(max_profit, price - current_min)
-            profits.append(max_profit)
-
-        total_max = 0
-        max_profit = 0
-        current_max = prices[-1]
-
-        for i in range(len(prices) - 1, -1, -1):
-            current_max = max(current_max, prices[i])
-            max_profit = max(max_profit, current_max - prices[i])
-            total_max = max(total_max, max_profit + profits[i])
-
-        return total_max
+        return dp_2_not_hold
