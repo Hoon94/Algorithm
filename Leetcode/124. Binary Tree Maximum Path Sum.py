@@ -10,13 +10,17 @@ class TreeNode:
 
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        def maxsums(node):
+        def maxend(node):
             if not node:
-                return [-2 ** 31] * 2
+                return 0
 
-            left = maxsums(node.left)
-            right = maxsums(node.right)
+            left = maxend(node.left)
+            right = maxend(node.right)
 
-            return [node.val + max(left[0], right[0], 0), max(left + right + [node.val + left[0] + right[0]])]
+            self.max = max(self.max, left + node.val + right)
+            return max(node.val + max(left, right), 0)
 
-        return max(maxsums(root))
+        self.max = None
+        maxend(root)
+
+        return self.max
