@@ -10,15 +10,16 @@ class TreeNode:
 
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        def helper(sum, root):
-            if not root:
-                return 0
+        self.res = 0
+        self.dfs(root, 0)
 
-            sum = sum * 10 + root.val
+        return self.res
 
+    def dfs(self, root, path):
+        if root:
             if not root.left and not root.right:
-                return sum
+                path = path * 10 + root.val
+                self.res += path
 
-            return helper(sum, root.left) + helper(sum, root.right)
-
-        return helper(0, root)
+            self.dfs(root.left, path * 10 + root.val)
+            self.dfs(root.right, path * 10 + root.val)
