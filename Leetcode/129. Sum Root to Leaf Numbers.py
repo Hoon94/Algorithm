@@ -1,5 +1,4 @@
 from typing import Optional
-import collections
 
 
 class TreeNode:
@@ -11,23 +10,23 @@ class TreeNode:
 
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        deque, res = collections.deque(), 0
+        stack, res = [], 0
 
         if root:
-            deque.append(root)
+            stack.append(root)
 
-        while deque:
-            node = deque.popleft()
+        while stack:
+            node = stack.pop()
 
             if not node.left and not node.right:
                 res += node.val
 
-            if node.left:
-                node.left.val += node.val * 10
-                deque.append(node.left)
-
             if node.right:
                 node.right.val += node.val * 10
-                deque.append(node.right)
+                stack.append(node.right)
+
+            if node.left:
+                node.left.val += node.val * 10
+                stack.append(node.left)
 
         return res
