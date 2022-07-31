@@ -16,6 +16,4 @@ class Solution:
                 board[i][j] = 'S'
                 save += (i, j - 1), (i, j + 1), (i - 1, j), (i + 1, j)
 
-        for row in board:
-            for i, c in enumerate(row):
-                row[i] = 'XO'[c == 'S']
+        board[:] = [['XO'[c == 'S'] for c in row] for row in board]
