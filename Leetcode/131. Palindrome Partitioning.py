@@ -3,14 +3,19 @@ from typing import List
 
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        if not s:
-            return [[]]
+        res = []
+        self.dfs(s, [], res)
 
-        ans = []
+        return res
+
+    def dfs(self, s, path, res):
+        if not s:
+            res.append(path)
+            return
 
         for i in range(1, len(s) + 1):
-            if s[:i] == s[:i][::-1]:
-                for suf in self.partition(s[i:]):
-                    ans.append([s[:i]] + suf)
+            if self.isPal(s[:i]):
+                self.dfs(s[i:], path + [s[:i]], res)
 
-        return ans
+    def isPal(self, s):
+        return s == s[::-1]
