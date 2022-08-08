@@ -1,4 +1,4 @@
-import collections
+from collections import deque
 
 
 class Node:
@@ -12,10 +12,10 @@ class Solution:
         if not node:
             return node
 
-        m, visited, queue = {}, set(), collections.deque([node])
+        m, visited, stack = dict(), set(), deque([node])
 
-        while queue:
-            n = queue.popleft()
+        while stack:
+            n = stack.pop()
 
             if n in visited:
                 continue
@@ -30,6 +30,6 @@ class Solution:
                     m[neigh] = Node(neigh.val)
 
                 m[n].neighbors.append(m[neigh])
-                queue.append(neigh)
+                stack.append(neigh)
 
         return m[node]
