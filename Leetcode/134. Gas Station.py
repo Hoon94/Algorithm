@@ -3,13 +3,14 @@ from typing import List
 
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        trip_tank, curr_tank, start, n = 0, 0, 0, len(gas)
+        if sum(gas) < sum(cost):
+            return -1
+
+        n, start, agg = len(gas), 0, 0
         for i in range(n):
-            trip_tank += gas[i] - cost[i]
-            curr_tank += gas[i] - cost[i]
+            agg += gas[i] - cost[i]
 
-            if curr_tank < 0:
-                start = i + 1
-                curr_tank = 0
+            if agg < 0:
+                start, agg = i + 1, 0
 
-        return start if trip_tank >= 0 else -1
+        return start
