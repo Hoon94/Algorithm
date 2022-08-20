@@ -3,11 +3,9 @@ from typing import List
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        dic = {}
+        res = 0
 
         for num in nums:
-            dic[num] = dic.get(num, 0) + 1
+            res ^= num
 
-        for key, val in dic.items():
-            if val == 1:
-                return key
+        return res
