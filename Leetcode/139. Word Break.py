@@ -3,8 +3,12 @@ from typing import List
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        ok = [True]
-        for i in range(1, len(s) + 1):
-            ok += any(ok[j] and s[j:i] in wordDict for j in range(i)),
+        dp = [False] * (len(s) + 1)
+        dp[0] = True
 
-        return ok[-1]
+        for i in range(len(s)):
+            for j in range(i, len(s)):
+                if dp[i] and s[i:j + 1] in wordDict:
+                    dp[j + 1] = True
+
+        return dp[-1]
