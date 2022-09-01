@@ -9,14 +9,17 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        dictionary = {}
+        if not head:
+            return False
 
-        while head:
-            if head in dictionary:
-                return True
-            else:
-                dictionary[head] = True
+        slow = head
+        fast = head.next
 
-            head = head.next
+        while slow != fast:
+            if not fast or not fast.next:
+                return False
 
-        return False
+            slow = slow.next
+            fast = fast.next.next
+
+        return True
