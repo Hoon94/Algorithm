@@ -12,8 +12,7 @@ class Solution:
         slow = fast = head
 
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+            slow, fast = slow.next, fast.next.next
 
             if slow == fast:
                 break
@@ -21,7 +20,6 @@ class Solution:
             return None
 
         while head != slow:
-            slow = slow.next
-            head = head.next
+            head, slow = head.next, slow.next
 
         return head
