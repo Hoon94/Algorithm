@@ -9,28 +9,27 @@ class ListNode:
 
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        if not head:
-            return head
-
-        slow, fast = head, head
-
-        while fast.next and fast.next.next:
-            slow = slow.next
-            fast = fast.next.next
-
-        prev, cur = None, slow.next
+        arr = []
+        cur, length = head, 0
 
         while cur:
-            save = cur.next
-            cur.next = prev
-            prev = cur
-            cur = save
+            arr.append(cur)
+            cur, length = cur.next, length + 1
 
-        slow.next = None
-        head2 = prev
+        left, right = 0, length - 1
+        last = head
 
-        while head2:
-            save1 = head.next
-            head.next = head2
-            head = head2
-            head2 = save1
+        while left < right:
+            arr[left].next = arr[right]
+            left += 1
+
+            if left == right:
+                last = arr[right]
+                break
+
+            arr[right].next = arr[left]
+            right -= 1
+            last = arr[left]
+
+        if last:
+            last.next = None
