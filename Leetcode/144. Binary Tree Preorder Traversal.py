@@ -10,13 +10,14 @@ class TreeNode:
 
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        res = []
-        self.dfs(root, res)
+        stack, res = [root], []
+
+        while stack:
+            node = stack.pop()
+
+            if node:
+                res.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
 
         return res
-
-    def dfs(self, root, res):
-        if root:
-            res.append(root.val)
-            self.dfs(root.left, res)
-            self.dfs(root.right, res)
