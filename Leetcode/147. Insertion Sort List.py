@@ -9,14 +9,25 @@ class ListNode:
 
 class Solution:
     def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        p, sl = head, ListNode()
+        p = dummy = ListNode(0)
+        cur = dummy.next = head
 
-        while p:
-            q = sl
+        while cur and cur.next:
+            val = cur.next.val
 
-            while q.next and q.next.val < p.val:
-                q = q.next
+            if cur.val < val:
+                cur = cur.next
+                continue
 
-            p.next, q.next, p, q = q.next, p, p.next, q.next
+            if p.next.val > val:
+                p = dummy
 
-        return sl.next
+            while p.next.val < val:
+                p = p.next
+
+            new = cur.next
+            cur.next = new.next
+            new.next = p.next
+            p.next = new
+
+        return dummy.next
