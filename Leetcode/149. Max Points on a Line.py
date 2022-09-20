@@ -1,7 +1,5 @@
 from typing import List
 
-from numpy import Inf
-
 
 class Solution:
     def maxPoints(self, points: List[List[int]]) -> int:
