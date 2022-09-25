@@ -3,13 +3,23 @@ from typing import List
 
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        global_max = prev_max = prev_min = nums[0]
+        ans = nums[0]
+        current = 1
 
-        for num in nums[1:]:
-            curr_min = min(prev_max * num, prev_min * num, num)
-            curr_max = max(prev_max * num, prev_min * num, num)
-            global_max = max(global_max, curr_max)
-            prev_max = curr_max
-            prev_min = curr_min
+        for i in nums:
+            current *= i
+            ans = max(ans, current)
 
-        return global_max
+            if current == 0:
+                current = 1
+
+        current = 1
+
+        for i in reversed(nums):
+            current *= i
+            ans = max(ans, current)
+
+            if current == 0:
+                current = 1
+
+        return ans
