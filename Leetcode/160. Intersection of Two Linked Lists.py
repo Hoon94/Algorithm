@@ -9,28 +9,14 @@ class ListNode:
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        curA, curB = headA, headB
-        lenA, lenB = 0, 0
+        if headA is None or headB is None:
+            return None
 
-        while curA is not None:
-            lenA += 1
-            curA = curA.next
+        pa = headA
+        pb = headB
 
-        while curB is not None:
-            lenB += 1
-            curB = curB.next
+        while pa is not pb:
+            pa = headB if pa is None else pa.next
+            pb = headA if pb is None else pb.next
 
-        curA, curB = headA, headB
-
-        if lenA > lenB:
-            for _ in range(lenA - lenB):
-                curA = curA.next
-        elif lenB > lenA:
-            for _ in range(lenB - lenA):
-                curB = curB.next
-
-        while curB != curA:
-            curB = curB.next
-            curA = curA.next
-
-        return curA
+        return pa
