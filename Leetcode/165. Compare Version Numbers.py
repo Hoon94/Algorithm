@@ -1,21 +1,14 @@
 class Solution:
     def compareVersion(self, version1: str, version2: str) -> int:
-        v1 = version1.split(".")
-        v2 = version2.split(".")
+        v1, v2 = self.helper(version1), self.helper(version2)
 
-        while v1 or v2:
-            v1_val = 0
-            v2_val = 0
+        return 1 if v1 > v2 else (-1 if v1 < v2 else 0)
 
-            if v1:
-                v1_val = int(v1.pop(0))
-            if v2:
-                v2_val = int(v2.pop(0))
+    def helper(self, v):
+        v = map(int, v.split("."))
+        i = len(v) - 1
 
-            if v1_val > v2_val:
-                return 1
+        while i >= 0 and v[i] == 0:
+            i -= 1
 
-            if v1_val < v2_val:
-                return -1
-
-        return 0
+        return v[:i+1]
