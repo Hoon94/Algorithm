@@ -3,10 +3,16 @@ from typing import List
 
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        dic = {}
+        for i in range(len(numbers)):
+            l, r = i + 1, len(numbers) - 1
+            tmp = target - numbers[i]
 
-        for i, num in enumerate(numbers):
-            if target - num in dic:
-                return [dic[target - num] + 1, i + 1]
+            while l <= r:
+                mid = l + (r - l) // 2
 
-            dic[num] = i
+                if numbers[mid] == tmp:
+                    return [i + 1, mid + 1]
+                elif numbers[mid] < tmp:
+                    l = mid + 1
+                else:
+                    r = mid - 1
