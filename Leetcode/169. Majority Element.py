@@ -3,10 +3,14 @@ from typing import List
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        m = {}
+        candidate, count = nums[0], 0
 
-        for n in nums:
-            if m[n] > len(nums) // 2:
-                return n
+        for num in nums:
+            if num == candidate:
+                count += 1
+            elif count == 0:
+                candidate, count = num, 1
+            else:
+                count -= 1
 
-            m[n] = m.get(n, 0) + 1
+        return candidate
