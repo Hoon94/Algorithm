@@ -1,10 +1,9 @@
 class Solution:
     def trailingZeroes(self, n: int) -> int:
-        x = 5
-        res = 0
+        r = 0
 
-        while x <= n:
-            res += n // x
-            x *= 5
+        while n > 0:
+            n /= 5
+            r += n
 
-        return res
+        return r
