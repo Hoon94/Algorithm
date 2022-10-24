@@ -3,11 +3,18 @@ from typing import List
 
 class Solution:
     def calculateMinimumHP(self, dungeon: List[List[int]]) -> int:
-        n = len(dungeon[0])
-        need = [2 ** 31] * (n - 1) + [1]
+        m, n = len(dungeon), len(dungeon[0])
 
-        for row in dungeon[::-1]:
-            for j in range(n)[::-1]:
-                need[j] = max(min(need[j:j+2]) - row[j], 1)
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                if i == m - 1 and j == n - 1:
+                    dungeon[i][j] = min(dungeon[i][j], 0) * -1 + 1
+                elif i == m - 1:
+                    dungeon[i][j] = max(dungeon[i][j + 1] - dungeon[i][j], 1)
+                elif j == n - 1:
+                    dungeon[i][j] = max(dungeon[i + 1][j] - dungeon[i][j], 1)
+                else:
+                    dungeon[i][j] = max(
+                        min(dungeon[i][j + 1], dungeon[i + 1][j]) - dungeon[i][j], 1)
 
-        return need[0]
+        return dungeon[0][0]
