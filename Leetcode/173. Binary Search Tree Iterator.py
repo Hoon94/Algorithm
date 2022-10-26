@@ -10,19 +10,21 @@ class TreeNode:
 
 class BSTIterator:
     def __init__(self, root: Optional[TreeNode]):
-        self.stack = list()
-        self.pushAll(root)
+        self.stack = []
+
+        while root:
+            self.stack.append(root)
+            root = root.left
 
     def next(self) -> int:
-        tmpNode = self.stack.pop()
-        self.pushAll(tmpNode.right)
+        node = self.stack.pop()
+        x = node.right
 
-        return tmpNode.val
+        while x:
+            self.stack.append(x)
+            x = x.left
+
+        return node.val
 
     def hasNext(self) -> bool:
-        return self.stack
-
-    def pushAll(self, node):
-        while node is not None:
-            self.stack.append(node)
-            node = node.left
+        return len(self.stack) > 0
