@@ -3,33 +3,27 @@ from typing import List
 
 class Solution:
     def largestNumber(self, nums: List[int]) -> str:
-        nums = self.mergeSort(nums, 0, len(nums) - 1)
+        self.quickSort(nums, 0, len(nums) - 1)
 
         return str(int("".join(map(str, nums))))
 
-    def mergeSort(self, nums, l, r):
-        if l > r:
+    def quickSort(self, nums, l, r):
+        if l >= r:
             return
 
-        if l == r:
-            return [nums[l]]
+        pos = self.partition(nums, l, r)
+        self.quickSort(nums, l, pos - 1)
+        self.quickSort(nums, pos + 1, r)
 
-        mid = l + (r - l) // 2
-        left = self.mergeSort(nums, l, mid)
-        right = self.mergeSort(nums, mid + 1, r)
+    def partition(self, nums, l, r):
+        low = l
 
-        return self.merge(left, right)
+        while l < r:
+            if self.compare(nums[l], nums[r]):
+                nums[l], nums[low] = nums[low], nums[l]
+                low += 1
+            l += 1
 
-    def merge(self, l1, l2):
-        res, i, j = [], 0, 0
-        while i < len(l1) and j < len(l2):
-            if not self.compare(l1[i], l2[j]):
-                res.append(l2[j])
-                j += 1
-            else:
-                res.append(l1[i])
-                i += 1
+        nums[low], nums[r] = nums[r], nums[low]
 
-        res.extend(l1[i:] or l2[j:])
-
-        return res
+        return low
