@@ -1,29 +1,18 @@
 from typing import List
 
 
+class Wrapper:
+    def __init__(self, val):
+        self.val = str(val)
+
+    def __lt__(self, other):
+        return int(self.val + other.val) < int(other.val + self.val)
+
+
 class Solution:
     def largestNumber(self, nums: List[int]) -> str:
-        self.quickSort(nums, 0, len(nums) - 1)
+        nums = [Wrapper(n) for n in nums]
+        nums.sort(reverse=True)
+        nums = [n.val for n in nums]
 
-        return str(int("".join(map(str, nums))))
-
-    def quickSort(self, nums, l, r):
-        if l >= r:
-            return
-
-        pos = self.partition(nums, l, r)
-        self.quickSort(nums, l, pos - 1)
-        self.quickSort(nums, pos + 1, r)
-
-    def partition(self, nums, l, r):
-        low = l
-
-        while l < r:
-            if self.compare(nums[l], nums[r]):
-                nums[l], nums[low] = nums[low], nums[l]
-                low += 1
-            l += 1
-
-        nums[low], nums[r] = nums[r], nums[low]
-
-        return low
+        return str(int(''.join(nums)))
