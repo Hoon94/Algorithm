@@ -3,15 +3,10 @@ from typing import List
 
 class Solution:
     def findRepeatedDnaSequences(self, s: str) -> List[str]:
-        sequence = set()
-        repeated = set()
+        r, record = set(), set()
 
         for i in range(len(s) - 9):
-            cur_seq = s[i:i+10]
+            substring = s[i:i+10]
+            [record, r][substring in record].add(substring)
 
-            if cur_seq in sequence:
-                repeated.add(cur_seq)
-
-            sequence.add(cur_seq)
-
-        return [*repeated]
+        return list(r)
