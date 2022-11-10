@@ -1,9 +1,6 @@
 class Solution:
     def reverseBits(self, n: int) -> int:
-        res = 0
+        oribin = '{0:032b}'.format(n)
+        reversebin = oribin[::-1]
 
-        for _ in range(32):
-            res = (res << 1) + (n & 1)
-            n >>= 1
-
-        return res
+        return int(reversebin, 2)
