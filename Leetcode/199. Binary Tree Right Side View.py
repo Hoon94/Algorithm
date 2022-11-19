@@ -10,10 +10,15 @@ class TreeNode:
 
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        if not root:
-            return []
+        def collect(node, depth):
+            if node:
+                if depth == len(view):
+                    view.append(node.val)
 
-        right = self.rightSideView(root.right)
-        left = self.rightSideView(root.left)
+                collect(node.right, depth + 1)
+                collect(node.left, depth + 1)
 
-        return [root.val] + right + left[len(right):]
+        view = []
+        collect(root, 0)
+
+        return view
