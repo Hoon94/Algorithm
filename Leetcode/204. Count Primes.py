@@ -1,11 +1,14 @@
 class Solution:
     def countPrimes(self, n: int) -> int:
-        seen, ans = [0] * n, 0
+        if n <= 2:
+            return 0
 
-        for num in range(2, n):
-            if seen[num]:
-                continue
-            ans += 1
-            seen[num*num:n:num] = [1] * ((n - 1) // num - num + 1)
+        dp = [True] * n
+        dp[0] = dp[1] = False
 
-        return ans
+        for i in range(2, n):
+            if dp[i]:
+                for j in range(i * i, n, i):
+                    dp[j] = False
+
+        return sum(dp)
