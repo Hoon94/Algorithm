@@ -1,15 +1,11 @@
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        s2t, t2s = {}, {}
+        d1, d2 = {}, {}
 
-        for i in range(len(s)):
-            if s[i] in s2t and s2t[s[i]] != t[i]:
-                return False
+        for i, val in enumerate(s):
+            d1[val] = d1.get(val, []) + [i]
 
-            if t[i] in t2s and t2s[t[i]] != s[i]:
-                return False
+        for i, val in enumerate(t):
+            d2[val] = d2.get(val, []) + [i]
 
-            s2t[s[i]] = t[i]
-            t2s[t[i]] = s[i]
-
-        return True
+        return sorted(d1.values()) == sorted(d2.values())
