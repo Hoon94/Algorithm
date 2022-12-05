@@ -1,12 +1,3 @@
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        d1, d2 = [0 for _ in range(256)], [0 for _ in range(256)]
-
-        for i in range(len(s)):
-            if d1[ord(s[i])] != d2[ord(t[i])]:
-                return False
-
-            d1[ord(s[i])] = i + 1
-            d2[ord(t[i])] = i + 1
-
-        return True
+        return len(set(zip(s, t))) == len(set(s)) and len(set(zip(t, s))) == len(set(t))
