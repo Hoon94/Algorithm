@@ -3,17 +3,19 @@ from typing import List
 
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        total = left = right = 0
-        res = len(nums) + 1
+        window_start = 0
+        min_size = float('inf')
+        summation = 0
 
-        while right < len(nums):
-            total += nums[right]
+        for window_end, number in enumerate(nums):
+            summation += number
 
-            while total >= target:
-                res = min(res, right - left + 1)
-                total -= nums[left]
-                left += 1
+            while summation >= target:
+                min_size = min(min_size, window_end - window_start + 1)
+                summation -= nums[window_start]
+                window_start += 1
 
-            right += 1
-
-        return res if res <= len(nums) else 0
+        if min_size == float('inf'):
+            return 0
+        else:
+            return min_size
