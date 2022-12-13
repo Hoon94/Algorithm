@@ -1,34 +1,43 @@
-class WordDictionary:
+import collections
 
+
+class TrieNode():
     def __init__(self):
-        self.children = [None] * 26
-        self.isEndOfWord = False
+        self.children = collections.defaultdict(TrieNode)
+        self.isWord = False
+
+
+class WordDictionary:
+    def __init__(self):
+        self.root = TrieNode()
 
     def addWord(self, word: str) -> None:
-        curr = self
+        node = self.root
 
-        for c in word:
-            if curr.children[ord(c) - ord('a')] == None:
-                curr.children[ord(c) - ord('a')] = WordDictionary()
-            curr = curr.children[ord(c) - ord('a')]
+        for w in word:
+            node = node.children[w]
 
-        curr.isEndOfWord = True
+        node.isWord = True
 
     def search(self, word: str) -> bool:
-        curr = self
+        node = self.root
+        self.res = False
+        self.dfs(node, word)
 
-        for i in range(len(word)):
-            c = word[i]
+        return self.res
 
-            if c == '.':
-                for ch in curr.children:
-                    if ch != None and ch.search(word[i+1:]):
-                        return True
-                return False
+    def dfs(self, node, word):
+        if not word:
+            if node.isWord:
+                self.res = True
+            return
 
-            if curr.children[ord(c) - ord('a')] == None:
-                return False
+        if word[0] == ".":
+            for n in node.children.values():
+                self.dfs(n, word[1:])
+        else:
+            node = node.children.get(word[0])
+            if not node:
+                return
 
-            curr = curr.children[ord(c) - ord('a')]
-
-        return curr != None and curr.isEndOfWord
+            self.dfs(node, word[1:])
