@@ -3,12 +3,17 @@ from typing import List
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        def rob(nums):
-            now = prev = 0
+        def simple_rob(nums):
+            rob, not_rob = 0, 0
 
-            for n in nums:
-                now, prev = max(now, prev + n), now
+            for num in nums:
+                rob, not_rob = not_rob + num, max(rob, not_rob)
 
-            return now
+            return max(rob, not_rob)
 
-        return max(rob(nums[len(nums) != 1:]), rob(nums[:-1]))
+        if not nums:
+            return 0
+        elif len(nums) == 1:
+            return nums[0]
+        else:
+            return max(simple_rob(nums[1:]), simple_rob(nums[:-1]))
