@@ -1,7 +1,12 @@
 class Solution:
     def shortestPalindrome(self, s: str) -> str:
-        r = s[::-1]
+        if not s or len(s) == 1:
+            return s
 
-        for i in range(len(s) + 1):
-            if s.startswith(r[i:]):
-                return r[:i] + s
+        j = 0
+
+        for i in reversed(range(len(s))):
+            if s[i] == s[j]:
+                j += 1
+
+        return s[::-1][:len(s) - j] + self.shortestPalindrome(s[:j-len(s)]) + s[j-len(s):]
