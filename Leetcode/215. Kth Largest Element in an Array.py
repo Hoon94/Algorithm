@@ -1,15 +1,15 @@
 from typing import List
+import heapq
 
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        for i in range(len(nums), len(nums) - k, -1):
-            tmp = 0
+        heap = []
 
-            for j in range(i):
-                if nums[j] > nums[tmp]:
-                    tmp = j
+        for num in nums:
+            heapq.heappush(heap, num)
 
-            nums[tmp], nums[i - 1] = nums[i - 1], nums[tmp]
+        for _ in range(len(nums) - k):
+            heapq.heappop(heap)
 
-        return nums[len(nums) - k]
+        return heapq.heappop(heap)
