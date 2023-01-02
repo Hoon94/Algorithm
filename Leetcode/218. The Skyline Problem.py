@@ -4,24 +4,20 @@ from heapq import *
 
 class Solution:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
-        skyline = []
-        i, n = 0, len(buildings)
-        liveHR = []
+        x_height_right_tuples = sorted(
+            [(L, -H, R) for L, R, H in buildings] + [(R, 0, "doesn't matter") for _, R, _ in buildings])
+        result, max_heap = [[0, 0]], [(0, float('inf'))]
 
-        while i < n or liveHR:
-            if not liveHR or i < n and buildings[i][0] <= -liveHR[0][1]:
-                x = buildings[i][0]
-                while i < n and buildings[i][0] == x:
-                    heappush(liveHR, (-buildings[i][2], -buildings[i][1]))
-                    i += 1
-            else:
-                x = -liveHR[0][1]
-                while liveHR and -liveHR[0][1] <= x:
-                    heappop(liveHR)
+        for x, negative_height, R in x_height_right_tuples:
+            while x >= max_heap[0][1]:
+                heappop(max_heap)
 
-            height = len(liveHR) and -liveHR[0][0]
+            if negative_height:
+                heappush(max_heap, (negative_height, R))
 
-            if not skyline or height != skyline[-1][1]:
-                skyline += [x, height]
+            curr_max_height = -max_heap[0][0]
 
-        return skyline
+            if result[-1][1] != curr_max_height:
+                result.append([x, curr_max_height])
+
+        return result[1:]
