@@ -4,26 +4,28 @@ from sortedcontainers import SortedSet
 
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums: List[int], indexDiff: int, valueDiff: int) -> bool:
-        if not nums or valueDiff < 0:
+        if valueDiff < 0:
             return False
 
-        ss, n = SortedSet(), 0
+        n = len(nums)
+        d = {}
+        w = valueDiff + 1
 
-        for i, num in enumerate(nums):
-            ceiling_idx = ss.bisect_left(num)
-            floor_idx = ceiling_idx - 1
+        for i in range(n):
+            m = nums[i] / w
 
-            if ceiling_idx < n and abs(ss[ceiling_idx] - num) <= valueDiff:
+            if m in d:
                 return True
 
-            if 0 <= floor_idx and abs(ss[floor_idx] - num) <= valueDiff:
+            if m - 1 in d and abs(nums[i] - d[m - 1]) < w:
                 return True
 
-            ss.add(num)
-            n += 1
+            if m + 1 in d and abs(nums[i] - d[m + 1]) < w:
+                return True
 
-            if i - indexDiff >= 0:
-                ss.remove(nums[i - indexDiff])
-                n -= 1
+            d[m] = nums[i]
+
+            if i >= indexDiff:
+                del d[nums[i - indexDiff] / w]
 
         return False
