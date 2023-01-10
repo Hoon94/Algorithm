@@ -3,14 +3,20 @@ from typing import List
 
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
-        area = 0
-        if matrix:
-            p = [0] * len(matrix[0])
-            for row in matrix:
-                s = map(int, row)
-                for j, c in enumerate(s[1:], 1):
-                    s[j] *= min(p[j - 1], p[j], s[j - 1]) + 1
-                area = max(area, max(s) ** 2)
-                p = s
+        if matrix is None or len(matrix) < 1:
+            return 0
 
-        return area
+        rows = len(matrix)
+        cols = len(matrix[0])
+
+        dp = [[0] * (cols + 1) for _ in range(rows + 1)]
+        max_side = 0
+
+        for r in range(rows):
+            for c in range(cols):
+                if matrix[r][c] == '1':
+                    dp[r + 1][c + 1] = min(dp[r][c],
+                                           dp[r + 1][c], dp[r][c + 1]) + 1
+                    max_side = max(max_side, dp[r + 1][c + 1])
+
+        return max_side * max_side
