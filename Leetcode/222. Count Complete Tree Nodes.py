@@ -13,24 +13,16 @@ class Solution:
         if not root:
             return 0
 
-        def depthLeft(node):
-            d = 0
-            while node:
-                d += 1
-                node = node.left
-            return d
+        leftDepth = self.getDepth(root.left)
+        rightDepth = self.getDepth(root.right)
 
-        def depthRight(node):
-            d = 0
-            while node:
-                d += 1
-                node = node.right
-            return d
-
-        ld = depthLeft(root.left)
-        rd = depthRight(root.right)
-
-        if ld == rd:
-            return 2 ** (ld + 1) - 1
+        if leftDepth == rightDepth:
+            return pow(2, leftDepth) + self.countNodes(root.right)
         else:
-            return 1 + self.countNodes(root.left) + self.countNodes(root.right)
+            return pow(2, rightDepth) + self.countNodes(root.left)
+
+    def getDepth(self, root):
+        if not root:
+            return 0
+
+        return 1 + self.getDepth(root.left)
