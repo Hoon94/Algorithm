@@ -1,18 +1,19 @@
 class Solution:
     def computeArea(self, ax1: int, ay1: int, ax2: int, ay2: int, bx1: int, by1: int, bx2: int, by2: int) -> int:
-        coxl = max(ax1, bx1)
-        coxr = min(ax2, bx2)
-        coyl = max(ay1, by1)
-        coyr = min(ay2, by2)
-        dx = coxr - coxl
-        dy = coyr - coyl
-        comm = 0
+        Sa = (ax2 - ax1) * (ay2 - ay1)
+        Sb = (bx2 - bx1) * (by2 - by1)
+        S = Sa + Sb
 
-        if dx > 0 and dy > 0:
-            comm = dx * dy
+        w_ov = min(ax2, bx2) - max(ax1, bx1)
 
-        a = abs(ax2 - ax1) * abs(ay2 - ay1)
-        b = abs(bx2 - bx1) * abs(by2 - by1)
-        area = a + b - comm
+        if w_ov <= 0:
+            return S
 
-        return area
+        h_ov = min(ay2, by2) - max(ay1, by1)
+
+        if h_ov <= 0:
+            return S
+
+        S_ov = w_ov * h_ov
+
+        return S - S_ov
