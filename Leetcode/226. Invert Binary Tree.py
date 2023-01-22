@@ -10,12 +10,8 @@ class TreeNode:
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        stack = [root]
+        if root:
+            invert = self.invertTree
+            root.left, root.right = invert(root.right), invert(root.left)
 
-        while stack:
-            node = stack.pop()
-            if node:
-                node.left, node.right = node.right, node.left
-                stack += node.left, node.right
-
-        return root
+            return root
