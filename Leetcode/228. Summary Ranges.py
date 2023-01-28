@@ -10,6 +10,6 @@ class Solution:
                 r = []
                 ranges += r,
 
-            r[1:] = n,
+            r[1:] = n
 
         return ['->'.join(map(str, r)) for r in ranges]
