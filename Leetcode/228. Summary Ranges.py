@@ -1,15 +1,12 @@
 from typing import List
+import collections
 
 
 class Solution:
     def summaryRanges(self, nums: List[int]) -> List[str]:
-        ranges, r = [], []
+        ranges = collections.defaultdict(list)
 
-        for n in nums:
-            if n - 1 not in r:
-                r = []
-                ranges += r,
+        for i, n in enumerate(nums):
+            ranges[n - i][1:] = n,
 
-            r[1:] = n
-
-        return ['->'.join(map(str, r)) for r in ranges]
+        return ['->'.join(map(str, r)) for r in sorted(ranges.values())]
