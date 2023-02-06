@@ -1,12 +1,9 @@
 class Solution:
     def countDigitOne(self, n: int) -> int:
-        ones = 0
-        m = r = 1
+        ones, m = 0, 1
 
-        while n > 0:
-            ones += (n + 8) / 10 * m + (n % 10 == 1) * r
-            r += n % 10 * m
+        while m <= n:
+            ones += (n / m + 8) / 10 * m + (n / m % 10 == 1) * (n % m + 1)
             m *= 10
-            n /= 10
 
         return ones
