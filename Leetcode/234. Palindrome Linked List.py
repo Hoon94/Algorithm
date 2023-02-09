@@ -10,17 +10,18 @@ class ListNode:
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         rev = None
-        slow = fast = head
+        fast = head
 
         while fast and fast.next:
             fast = fast.next.next
-            rev, rev.next, slow = slow, rev, slow.next
+            rev, rev.next, head = head, rev, head.next
 
-        if fast:
-            slow = slow.next
+        tail = head.next if fast else head
+        isPali = True
 
-        while rev and rev.val == slow.val:
-            slow = slow.next
-            rev = rev.next
+        while rev:
+            isPali = isPali and rev.val == tail.val
+            head, head.next, rev = rev, head, rev.next
+            tail = tail.next
 
-        return not rev
+        return isPali
