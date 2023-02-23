@@ -3,24 +3,21 @@ from typing import List
 
 class Solution:
     def diffWaysToCompute(self, expression: str) -> List[int]:
-        m = {}
-        return self.dfs(expression, m)
+        def helper(l, r):
+            ans = []
 
-    def dfs(self, input, m):
-        if input in m:
-            return m[input]
+            for i in range(l, r):
+                if expression[i] not in ops:
+                    continue
+                ans += [ops[expression[i]](le, ri) for le in helper(l, i)
+                        for ri in helper(i + 1, r)]
 
-        if input.isdigit():
-            m[input] = int(input)
-            return [int(input)]
+            return ans if len(ans) != 0 else [int(expression[l:r])]
 
-        ret = []
-        for i, c in enumerate(input):
-            if c in "+-*":
-                l = self.diffWaysToCompute(input[:i])
-                r = self.diffWaysToCompute(input[i+1:])
-                ret.extend(eval(str(x) + c + str(y)) for x in l for y in r)
+        ops = {
+            '-': lambda x, y: x - y,
+            '+': lambda x, y: x + y,
+            '*': lambda x, y: x * y,
+        }
 
-        m[input] = ret
-
-        return ret
+        return helper(0, len(expression))
