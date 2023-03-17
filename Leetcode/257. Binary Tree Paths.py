@@ -10,13 +10,17 @@ class TreeNode:
 
 class Solution:
     def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
-        return self.dfs(root, "")
+        stack, ret = [(root, "")], []
 
-    def dfs(self, root, path):
-        if not root:
-            return []
-        path += str(root.val)
-        if not root.left and not root.right:
-            return [path]
-        path += "->"
-        return self.dfs(root.left, path) + self.dfs(root.right, path)
+        while stack:
+            node, path = stack.pop()
+
+            if node:
+                if not node.left and not node.right:
+                    ret.append(path+str(node.val))
+
+                s = path + str(node.val) + "->"
+                stack.append((node.right, s))
+                stack.append((node.left, s))
+
+        return ret
