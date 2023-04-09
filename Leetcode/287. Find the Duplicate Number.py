@@ -3,14 +3,9 @@ from typing import List
 
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        for num in nums:
-            if nums[abs(num)] < 0:
-                ans = abs(num)
-                break
+        N = len(nums)
 
-            nums[abs(num)] = -nums[abs(num)]
-
-        for i in range(len(nums)):
-            nums[i] = abs(nums[i])
-
-        return ans
+        for i, num in enumerate(nums):
+            for j in range(i + 1, N):
+                if nums[j] == num:
+                    return num
