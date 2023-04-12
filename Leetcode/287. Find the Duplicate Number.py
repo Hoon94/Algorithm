@@ -3,16 +3,16 @@ from typing import List
 
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        N = len(nums) - 1
-        nbits = N.bit_length()
-        ans = 0
+        slow = nums[nums[0]]
+        fast = nums[slow]
 
-        for p in range(nbits):
-            mask = 1 << p
-            a = sum(1 if num & mask else 0 for num in nums)
-            b = sum(1 if num & mask else 0 for num in range(1, N + 1))
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
 
-            if a > b:
-                ans |= mask
+        slow = nums[0]
 
-        return ans
+        while slow != fast:
+            slow, fast = nums[slow], nums[fast]
+
+        return slow
