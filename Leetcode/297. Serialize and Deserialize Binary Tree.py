@@ -1,3 +1,6 @@
+import collections
+
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
@@ -7,32 +10,43 @@ class TreeNode(object):
 
 class Codec:
     def serialize(self, root):
-        def doit(node):
+        flat_bt = []
+        queue = collections.deque([root])
+
+        while queue:
+            node = queue.pop()
+
             if node:
-                vals.append(str(node.val))
-                doit(node.left)
-                doit(node.right)
+                flat_bt.append(str(node.val))
+                queue.appendleft(node.left)
+                queue.appendleft(node.right)
             else:
-                vals.append('#')
+                flat_bt.append('')
 
-        vals = []
-        doit(root)
-
-        return ' '.join(vals)
+        return ','.join(flat_bt)
 
     def deserialize(self, data):
-        def doit():
-            val = next(vals)
+        if not data:
+            return
 
-            if val == '#':
-                return None
+        flat_bt = data.split(',')
+        ans = TreeNode(flat_bt[0])
+        queue = collections.deque([ans])
+        i = 1
 
-            node = TreeNode(int(val))
-            node.left = doit()
-            node.right = doit()
+        while queue:
+            node = queue.pop()
 
-            return node
+            if i < len(flat_bt) and flat_bt[i]:
+                node.left = TreeNode(int(flat_bt[i]))
+                queue.appendleft(node.left)
 
-        vals = iter(data.split())
+            i += 1
 
-        return doit()
+            if i < len(flat_bt) and flat_bt[i]:
+                node.right = TreeNode(int(flat_bt[i]))
+                queue.appendleft(node.right)
+
+            i += 1
+
+        return ans
