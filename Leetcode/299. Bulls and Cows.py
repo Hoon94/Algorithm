@@ -1,19 +1,23 @@
-from collections import Counter
+from collections import defaultdict
 
 
 class Solution:
     def getHint(self, secret: str, guess: str) -> str:
-        lookup = Counter(secret)
-        x, y = 0, 0
+        diff_dict = defaultdict(int)
+        num_bulls, num_cows = 0, 0
 
-        for i in range(len(guess)):
-            if secret[i] == guess[i]:
-                x += 1
-                lookup[secret[i]] -= 1
+        for char1, char2 in zip(secret, guess):
+            if char1 == char2:
+                num_bulls += 1
+            else:
+                if diff_dict[char2] < 0:
+                    num_cows += 1
 
-        for i in range(len(guess)):
-            if guess[i] in lookup and secret[i] != guess[i] and lookup[guess[i]] > 0:
-                y += 1
-                lookup[guess[i]] -= 1
+                diff_dict[char2] += 1
 
-        return "{}A{}B".format(x, y)
+                if diff_dict[char1] > 0:
+                    num_cows += 1
+
+                diff_dict[char1] -= 1
+
+        return str(num_bulls) + 'A' + str(num_cows) + 'B'
